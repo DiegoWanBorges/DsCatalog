@@ -1,0 +1,25 @@
+.product-details-container{
+    margin-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+
+}
+
+.product-details{
+    padding: 50px 60px 90px 60px;
+}
+.icon-goback{
+    color: #407BFF;
+    transform: rotate(-180deg);
+    margin-right: 30px;
+}
+.product-details-goback{
+    display: flex;
+    align-items: center;
+}
+.text-goback{
+    font-size: 24px;
+    line-height: 33px;
+    letter-spacing: -0.015em;
+    color: #263238;
+}
