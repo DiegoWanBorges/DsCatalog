@@ -8,37 +8,45 @@ import Pagination from 'core/components/Pagination/index'
 import './styles.scss'
 
 const Catalog = () => {
-    const[productsResponse,setProductsResponse]=useState<ProductsResponse>();
-    const[isLoading,setIsLoading] = useState(false);
+    const [productsResponse, setProductsResponse] = useState<ProductsResponse>();
+    const [isLoading, setIsLoading] = useState(false);
+    const [activePage, setActivePage] = useState(0);
 
     useEffect(() => {
-        const params ={
-            pages:0,
-            linesPerPage:12
+        const params = {
+            page: activePage,
+            linesPerPage: 12
         }
         setIsLoading(true)
-        makeRequest({url: '/products',params})
-        .then(response => setProductsResponse(response.data))
-        .finally(() =>{
-            setIsLoading(false)
-        })
-    },[])
+        makeRequest({ url: '/products', params })
+            .then(response => setProductsResponse(response.data))
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [activePage])
 
     return (
         <div className="catalog-container">
             <h1 className="catalog-title">Catálogo de Produtos</h1>
             <div className="catalog-produts">
-                
-                {isLoading ? <ProductCardLoader /> :(
-                    productsResponse?.content.map(product =>(
+
+                {isLoading ? <ProductCardLoader /> : (
+                    productsResponse?.content.map(product => (
                         <Link to={`/products/${product.id}`} key={product.id}  >
                             <ProductCard product={product} />
                         </Link>
                     ))
                 )}
             </div>
-            <Pagination/>
-            
+
+            {productsResponse &&
+                <Pagination
+                    totalPages={productsResponse?.totalPages}
+                    activePage={activePage}
+                    onChange={page => setActivePage(page)}
+                />
+            }
+
         </div>
     )
 }
