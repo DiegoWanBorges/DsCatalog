@@ -24,7 +24,7 @@ const Catalog = () => {
                 {
                     productsResponse?.content.map(product =>(
                         <Link to="/products/1" key={product.id}  >
-                            <ProductCard />
+                            <ProductCard product={product} />
                         </Link>
                     ))
                 }
