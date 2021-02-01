@@ -23,7 +23,7 @@ const Catalog = () => {
             <div className="catalog-produts">
                 {
                     productsResponse?.content.map(product =>(
-                        <Link to="/products/1" key={product.id}  >
+                        <Link to={`/products/${product.id}`} key={product.id}  >
                             <ProductCard product={product} />
                         </Link>
                     ))
