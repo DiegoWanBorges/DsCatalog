@@ -7,8 +7,6 @@ import java.util.List;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.validation.annotation.Validated;
-
 import com.devsuperior.dscatalog.entities.User;
 
 public class UserDTO implements Serializable {
