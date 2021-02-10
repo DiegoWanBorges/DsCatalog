@@ -28,7 +28,7 @@ const Pagination = ( {totalPages, activePage, onChange} :Props ) => {
                         key={item}
                         className={`pagination-item ${item===activePage ? 'active' : ''}`}
                         onClick={() => onChange(item)}
-
+                        
                     >
                         {item+1}
                     </div>
