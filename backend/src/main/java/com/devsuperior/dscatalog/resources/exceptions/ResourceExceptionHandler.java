@@ -39,6 +39,7 @@ public class ResourceExceptionHandler {
 	}
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest request){
+	
 		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
 		
 		StandardError err = new StandardError();
@@ -51,10 +52,7 @@ public class ResourceExceptionHandler {
 		for (FieldError f : e.getBindingResult().getFieldErrors()) {
 			err.getErros().add(new FieldMessage(f.getField(), f.getDefaultMessage()));
 		}
-		
-		
-		
-		
+				
 		return ResponseEntity.status(status).body(err);
 	}
 	
