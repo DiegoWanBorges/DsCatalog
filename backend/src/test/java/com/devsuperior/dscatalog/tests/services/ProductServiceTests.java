@@ -19,7 +19,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.devsuperior.dscatalog.dto.ProductDTO;
+import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.entities.Product;
+import com.devsuperior.dscatalog.repositories.CategoryRepository;
 import com.devsuperior.dscatalog.repositories.ProductRepository;
 import com.devsuperior.dscatalog.services.ProductService;
 import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
@@ -32,6 +34,8 @@ public class ProductServiceTests {
 	private ProductService service;
 	@Mock
 	private ProductRepository repository;
+	@Mock
+	private CategoryRepository categoryRepository;
 	
 	private Long existingId;
 	private Long nonExistingId;
@@ -39,6 +43,8 @@ public class ProductServiceTests {
 	private Product product;
 	private ProductDTO productDTO;
 	private PageImpl<Product> page;
+	private Category category;
+	
 	
 	@BeforeEach
 	void setup() throws Exception{
@@ -55,6 +61,8 @@ public class ProductServiceTests {
 		
 		Mockito.when(repository.getOne(existingId)).thenReturn(product);
 		Mockito.doThrow(EntityNotFoundException.class).when(repository).getOne(nonExistingId);
+		
+		Mockito.when(categoryRepository.getOne(ArgumentMatchers.any())).thenReturn(category);
 		
 		Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(product));
 		Mockito.when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
