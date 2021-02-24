@@ -13,8 +13,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import com.devsuperior.dscatalog.entities.Product;
 import com.devsuperior.dscatalog.entities.Category;
+import com.devsuperior.dscatalog.entities.Product;
 import com.devsuperior.dscatalog.repositories.ProductRepository;
 import com.devsuperior.dscatalog.tests.factory.ProductFactory;
 
@@ -62,7 +62,6 @@ public class ProductRepositoryTests {
 		Product product = ProductFactory.createproduct();
 		product.setId(null);
 		product=repository.save(product);
-		Optional<Product> result = repository.findById(product.getId());
 		Assertions.assertNotNull(product.getId());
 		Assertions.assertEquals(countTotalProducts+1, product.getId());
 	}
