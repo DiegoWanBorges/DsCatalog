@@ -1,6 +1,7 @@
 .auth-container{
     display: flex;
-     padding: 40px 40px 100px 140px;   
+     padding: 40px 40px 100px 0px;   
+     justify-content: center;
 }
 .auth-info.title{
     font-size: 55px;
@@ -16,7 +17,4 @@
     line-height: 33px;
     letter-spacing: -0.015em;
     color: #9E9E9E;
-}
-.auth-content{
-  
 }
