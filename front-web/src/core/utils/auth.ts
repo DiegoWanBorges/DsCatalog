@@ -14,7 +14,7 @@ type LoginResponse = {
 }
 export type Role = 'ROLE_OPERATOR' | 'ROLE_ADMIN';
 
-type AccessToke = {
+type AccessToken = {
    exp: number;
    user_name: string;
    authorities: Role[];
@@ -24,29 +24,40 @@ type AccessToke = {
     localStorage.setItem('authData',JSON.stringify(loginResponse));
  }
  export const getSessionData = () =>{
-    console.log(localStorage.getItem('authData') ?? '{}')
-    return JSON.parse(localStorage.getItem('authData') ?? '{}') as LoginResponse;
+    const sessionData = localStorage.getItem('authData') || '{}';
+    const sessionParsedData = JSON.parse(sessionData);
+    return sessionParsedData as LoginResponse;
  }
 
  export const getAccessTokenDecoded = () =>{
-     const sessionData = getSessionData();
-     const tokenDecoded = jwtDecode(sessionData.access_token) ;
-     return tokenDecoded as AccessToke;
+    const sessionData = getSessionData();
+    try {
+        const tokenDecoded = jwtDecode(sessionData.access_token) ;
+        return tokenDecoded as AccessToken;
+    } catch (error) {
+        return {}  as AccessToken 
+    }
  }
 
  export const isTokenValid = () => {
+    console.log("IsTokenValid")
      const { exp } = getAccessTokenDecoded();
-     return Date.now() <= exp*1000;
+        if(Date.now() <= exp*1000){
+            return true;
+        }
+     return false;
  }
  export const isAuthenticated = () =>{
    const sessionData = getSessionData();
+   console.log("IsAuth")
+   console.log(sessionData)
    return sessionData.access_token && isTokenValid();
  }
 
  export const isAllowedByRole = (routeRoles :Role[] =[]) =>{
-     if (routeRoles.length===0){
+    if (routeRoles.length===0){
          return true;
-     }
+    }
     const { authorities } = getAccessTokenDecoded();
-    return routeRoles.some(role => authorities.includes(role));
+    return routeRoles.some(role => authorities?.includes(role));
 }
