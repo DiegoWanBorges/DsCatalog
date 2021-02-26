@@ -20,17 +20,17 @@ type AccessToke = {
    authorities: Role[];
 }
 
-export const saveSessionData = (loginResponse: LoginResponse) =>{
+ export const saveSessionData = (loginResponse: LoginResponse) =>{
     localStorage.setItem('authData',JSON.stringify(loginResponse));
-}
-export const getSessionData = () =>{
+ }
+ export const getSessionData = () =>{
+    console.log(localStorage.getItem('authData') ?? '{}')
     return JSON.parse(localStorage.getItem('authData') ?? '{}') as LoginResponse;
  }
 
  export const getAccessTokenDecoded = () =>{
      const sessionData = getSessionData();
-
-     const tokenDecoded = jwtDecode(sessionData.access_token);
+     const tokenDecoded = jwtDecode(sessionData.access_token) ;
      return tokenDecoded as AccessToke;
  }
 
@@ -38,15 +38,15 @@ export const getSessionData = () =>{
      const { exp } = getAccessTokenDecoded();
      return Date.now() <= exp*1000;
  }
-
  export const isAuthenticated = () =>{
-    const sessionData = getSessionData();
-    return sessionData.access_token && isTokenValid();
+   const sessionData = getSessionData();
+   return sessionData.access_token && isTokenValid();
  }
 
  export const isAllowedByRole = (routeRoles :Role[] =[]) =>{
      if (routeRoles.length===0){
          return true;
      }
-    return false;
- }
+    const { authorities } = getAccessTokenDecoded();
+    return routeRoles.some(role => authorities.includes(role));
+}
