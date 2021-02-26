@@ -1,7 +1,7 @@
 import axios, { Method } from 'axios'
 import qs from 'qs'
-import { CLIENTE_ID, CLIENTE_SECRET, getSessionData } from './auth'
-import history from './history'
+import { CLIENTE_ID, CLIENTE_SECRET, getSessionData, logout } from './auth'
+
 
 type RequestParams ={
     method?: Method;
@@ -23,7 +23,8 @@ axios.interceptors.response.use(function (response) {
   }, function (error) {
     switch(error.response.status) { 
         case 401: { 
-           history.push('/admin/auth/login');
+           logout();
+
            break; 
         } 
      }
