@@ -58,6 +58,10 @@ public class ProductService {
 	public ProductDTO insert(ProductDTO dto) {
 			Product entity = new Product();
 			copyDtoToEntity(dto,entity);
+			if (entity.getCategories().size()==0) {
+				Category cat = new Category(1L,"teste");
+				entity.getCategories().add(cat);
+			}
 			return new ProductDTO(repository.save(entity));
 	}
 	@Transactional
