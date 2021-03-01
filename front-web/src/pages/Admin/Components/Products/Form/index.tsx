@@ -3,8 +3,7 @@ import BaseForm from '../../BaseForm';
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { Product } from 'core/types/Product';
+import { useEffect } from 'react';
 type FormState = {
     name: string;
     price: string;
