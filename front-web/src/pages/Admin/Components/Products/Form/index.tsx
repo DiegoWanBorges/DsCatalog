@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import './styles.scss'
 import { Category } from 'core/types/Product';
+import CurrencyInput from 'react-currency-input-field';
+import ImageUpload from '../ImageUpload';
 
 type FormState = {
     name: string;
@@ -116,12 +118,23 @@ const ProductForm = () => {
                         </div>
 
                         <div className="margin-bottom-30">
-                            <input
-                                type="number"
-                                className={`form-control imput-base ${errors.price ? 'is-invalid' : ''}`}
+                            <Controller
                                 name="price"
-                                placeholder="Digite o preço do produto"
-                                ref={register({ required: "Campo obrigatório" })}
+                                defaultValue=""
+                                control={control}
+                                rules={{required:"Campo obrigatório"}}
+                                render={({value,onChange}) =>(
+                                    <CurrencyInput
+                                        placeholder="Preço"
+                                        className={`form-control imput-base ${errors.price ? 'is-invalid' : ''}`}
+                                        value={value}
+                                        intlConfig={{locale:'pt-BR',currency:'BRL'}}
+                                        onValueChange={onChange}
+                                        groupSeparator=","
+                                        decimalSeparator="."
+                                        
+                                        />
+                                )}
                             />
                             {errors.price && (
                                 <div className="invalid-feedback d-block">
@@ -131,18 +144,7 @@ const ProductForm = () => {
                         </div>
 
                         <div className="margin-bottom-30">
-                            <input
-                                type="text"
-                                className={`form-control imput-base ${errors.imgUrl ? 'is-invalid' : ''}`}
-                                name="imgUrl"
-                                placeholder="Imagem"
-                                ref={register({ required: "Campo obrigatório" })}
-                            />
-                            {errors.imgUrl && (
-                                <div className="invalid-feedback d-block">
-                                    {errors.imgUrl.message}
-                                </div>
-                            )}
+                            <ImageUpload/>
                         </div>
 
                     </div>
