@@ -20,8 +20,11 @@ const ProductForm = () => {
             data: data
         })
         .then(()=>{
-            toast.success("Produto cadastrado com sucesso!")
+            toast.success("Produto salvo com sucesso!")
             history.push('/admin/products')
+        })
+        .catch(() =>{
+            toast.error("Erro ao salvar produto!")
         })
     }
 

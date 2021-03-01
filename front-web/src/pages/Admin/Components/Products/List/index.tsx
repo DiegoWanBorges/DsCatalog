@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import Card from '../Card';
 import './styles.scss'
 
 
@@ -19,6 +20,11 @@ const ProductList = () => {
             >
                 ADCIONAR
             </button>
+            <div className="admin-list-container">
+                <Card/>
+                <Card/>
+                <Card/>
+            </div>
 
         </div>
     )
