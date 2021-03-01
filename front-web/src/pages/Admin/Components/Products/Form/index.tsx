@@ -4,6 +4,9 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import Select from 'react-select';
+import './styles.scss'
+
 type FormState = {
     name: string;
     price: string;
@@ -14,6 +17,11 @@ type ParamsType = {
     productId: string;
 }
 
+const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
 
 const ProductForm = () => {
     const { register, handleSubmit, errors,setValue } = useForm<FormState>();
@@ -72,6 +80,15 @@ const ProductForm = () => {
                                 </div>
                             )}
                         </div>
+                        <div className="margin-bottom-30">
+                            <Select 
+                                options={options}
+                                classNamePrefix="categories-select"
+                                isMulti
+                                placeholder="Categoria"
+                            />
+                        </div>
+
                         <div className="margin-bottom-30">
                             <input
                                 type="number"
