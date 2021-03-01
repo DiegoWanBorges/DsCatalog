@@ -3,9 +3,10 @@ import BaseForm from '../../BaseForm';
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import './styles.scss'
+import { Category } from 'core/types/Product';
 
 type FormState = {
     name: string;
@@ -17,20 +18,15 @@ type ParamsType = {
     productId: string;
 }
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
-
 const ProductForm = () => {
     const { register, handleSubmit, errors,setValue } = useForm<FormState>();
     const history = useHistory();
     const { productId } = useParams<ParamsType>();
+    const [isLoadingCategories,setIsLoadingCategories] =useState(false);
+    const [categories,setCategories] = useState<Category[]>([]);
     const isEditing = productId !=='create';
 
     useEffect(() => {
-
         if (isEditing) {
             makeRequest({ url: `/products/${productId}` })
                 .then(response => {
@@ -41,6 +37,21 @@ const ProductForm = () => {
                 })
             }
     }, [productId,isEditing,setValue])
+
+    useEffect(() => {
+            setIsLoadingCategories(true);
+            makeRequest({ url: `/categories/` })
+                .then(response => {
+                    setCategories(response.data.content)
+                })
+                .finally(() =>{
+                    setIsLoadingCategories(false);
+                })
+
+    }, [])
+
+    
+
 
     const onSubmit = (data: FormState) => {
         makePrivateRequest({
@@ -80,12 +91,16 @@ const ProductForm = () => {
                                 </div>
                             )}
                         </div>
+
                         <div className="margin-bottom-30">
                             <Select 
-                                options={options}
+                                options={categories}
+                                getOptionLabel={(option: Category) => option.name}
+                                getOptionValue={(option: Category) => String(option.id) }
                                 classNamePrefix="categories-select"
                                 isMulti
                                 placeholder="Categoria"
+                                
                             />
                         </div>
 
