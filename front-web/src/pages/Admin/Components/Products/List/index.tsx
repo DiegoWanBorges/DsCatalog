@@ -5,22 +5,24 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import Card from '../Card';
+import CardLoader from '../Loaders/ProductCardLoaders';
 import './styles.scss'
 
 
 const ProductList = () => {
     const [productsResponse, setProductsResponse] = useState<ProductsResponse>();
     const [activePage, setActivePage] = useState(0);
-
+    const[isLoading,setIsLoading] = useState(false);
     const getProducts = useCallback(() => {
         const params = {
             page: activePage,
             linesPerPage: 4
         }
+        setIsLoading(true)
         makeRequest({ url: '/products', params })
             .then(response => setProductsResponse(response.data))
             .finally(() => {
-
+                setIsLoading(false);
             })
     }, [activePage])
 
@@ -63,14 +65,15 @@ const ProductList = () => {
                 ADCIONAR
             </button>
             <div className="admin-list-container">
-                {
-                    productsResponse?.content.map(product => (
-                        <Card
-                            product={product} key={product.id}
-                            onRemove={onRemove}
-                        />
-                    ))
-                }
+                {isLoading ? <CardLoader/> : (
+                        productsResponse?.content.map(product => (
+                            <Card
+                                product={product} key={product.id}
+                                onRemove={onRemove}
+                            />
+                        ))
+                )}
+                
                 {productsResponse &&
                     <Pagination
                         totalPages={productsResponse?.totalPages}
