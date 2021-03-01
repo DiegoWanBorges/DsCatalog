@@ -31,7 +31,7 @@ public class ProductDTO implements Serializable {
 	private String imgUrl;
 	@PastOrPresent(message="A data do produto não pode ser futura")
 	private Instant date;
-	/*@NotEmpty(message="Produto sem categoria não é permitida")*/
+	@NotEmpty(message="Produto sem categoria não é permitida")
 	private List<CategoryDTO> categories = new ArrayList<>();
 	
 	public ProductDTO() {
