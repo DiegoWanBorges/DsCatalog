@@ -1,36 +1,58 @@
-import { makePrivateRequest } from 'core/utils/request';
+import { makePrivateRequest, makeRequest } from 'core/utils/request';
 import BaseForm from '../../BaseForm';
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Product } from 'core/types/Product';
 type FormState = {
     name: string;
     price: string;
     imgUrl: string;
     description: string
 }
+type ParamsType = {
+    productId: string;
+}
+
 
 const ProductForm = () => {
-    const { register, handleSubmit, errors } = useForm<FormState>();
+    const { register, handleSubmit, errors,setValue } = useForm<FormState>();
     const history = useHistory();
+    const { productId } = useParams<ParamsType>();
+    const isEditing = productId !=='create';
+
+    useEffect(() => {
+
+        if (isEditing) {
+            makeRequest({ url: `/products/${productId}` })
+                .then(response => {
+                    setValue('name',response.data.name)
+                    setValue('description',response.data.description)
+                    setValue('price',response.data.price)
+                    setValue('imgUrl',response.data.imgUrl)
+                })
+            }
+    }, [productId,isEditing,setValue])
+
     const onSubmit = (data: FormState) => {
         makePrivateRequest({
-            url: '/products',
-            method: 'POST',
+            url: isEditing ? `/products/${productId}`: '/products/',
+            method: isEditing ? 'PUT': 'POST',
             data: data
         })
-        .then(()=>{
-            toast.success("Produto salvo com sucesso!")
-            history.push('/admin/products')
-        })
-        .catch(() =>{
-            toast.error("Erro ao salvar produto!")
-        })
+            .then(() => {
+                toast.success("Produto salvo com sucesso!")
+                history.push('/admin/products')
+            })
+            .catch(() => {
+                toast.error("Erro ao salvar produto!")
+            })
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}  >
-            <BaseForm tittle="CADASTRAR PRODUTO">
+            <BaseForm tittle= {isEditing ? 'EDITAR PRODUTO': 'CADASTRAR PRODUTO'}>
                 <div className="row">
                     <div className="col-6">
                         <div className="margin-bottom-30">
@@ -39,11 +61,11 @@ const ProductForm = () => {
                                 name="name"
                                 className={`form-control imput-base ${errors.name ? 'is-invalid' : ''}`}
                                 placeholder="Nome do produto"
-                                ref={register({ 
-                                        required: "Campo obrigatório" ,
-                                        minLength:{value:5, message:"O campo deve ter minímo 5 caracteres"},
-                                        maxLength:{value:60, message:"O campo deve ter no maximo 60 caracteres"},
-                                    })}
+                                ref={register({
+                                    required: "Campo obrigatório",
+                                    minLength: { value: 5, message: "O campo deve ter minímo 5 caracteres" },
+                                    maxLength: { value: 60, message: "O campo deve ter no maximo 60 caracteres" },
+                                })}
                             />
                             {errors.name && (
                                 <div className="invalid-feedback d-block">
@@ -72,7 +94,7 @@ const ProductForm = () => {
                                 className={`form-control imput-base ${errors.imgUrl ? 'is-invalid' : ''}`}
                                 name="imgUrl"
                                 placeholder="Imagem"
-                                ref={register({ required: "Campo obrigatório"})}
+                                ref={register({ required: "Campo obrigatório" })}
                             />
                             {errors.imgUrl && (
                                 <div className="invalid-feedback d-block">
@@ -94,9 +116,9 @@ const ProductForm = () => {
                             ref={register({ required: "Campo obrigatório" })}
                         />
                         {errors.description && (
-                                <div className="invalid-feedback d-block">
-                                    {errors.description.message}
-                                </div>
+                            <div className="invalid-feedback d-block">
+                                {errors.description.message}
+                            </div>
                         )}
                     </div>
                 </div>
