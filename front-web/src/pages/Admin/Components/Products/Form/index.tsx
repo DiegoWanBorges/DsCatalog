@@ -9,11 +9,14 @@ import './styles.scss'
 import { Category } from 'core/types/Product';
 import CurrencyInput from 'react-currency-input-field';
 import ImageUpload from '../ImageUpload';
-
-type FormState = {
+import DescriptionFilter from './DescriptionFilter';
+import { convertToRaw, EditorState } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import {stateFromHTML} from 'draft-js-import-html';
+export type FormState = {
     name: string;
     price: string;
-    description: string;
+    description: EditorState;
     categories: Category[];
 }
 type ParamsType = {
@@ -29,15 +32,17 @@ const ProductForm = () => {
     const isEditing = productId !=='create';
     const [uploadedImgUrl,setUploadedImgUrl] = useState('');
     const [productImgUrl,setProductImgUrl] = useState('');
+    
     useEffect(() => {
         if (isEditing) {
             makeRequest({ url: `/products/${productId}` })
                 .then(response => {
+
                     setValue('name',response.data.name)
-                    setValue('description',response.data.description)
                     setValue('price',response.data.price)
                     setValue('categories',response.data.categories)
                     setProductImgUrl(response.data.imgUrl)
+                    setValue('description',convertDescriptionAsEditorState(response.data.description))
                 })
             }
     }, [productId,isEditing,setValue])
@@ -53,12 +58,18 @@ const ProductForm = () => {
                 })
     }, [])
 
-    
-    
+    const getDescriptionFromEditor =(editorState: EditorState) =>{
+        return draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    }
+    const convertDescriptionAsEditorState=(description: string) =>{
+        const contentState = stateFromHTML(description);
+        return EditorState.createWithContent(contentState);
+    }
 
     const onSubmit = (data: FormState) => {
         const payload ={
             ...data,
+            description: getDescriptionFromEditor(data.description),
             imgUrl:uploadedImgUrl || productImgUrl
         }
         makePrivateRequest({
@@ -161,17 +172,12 @@ const ProductForm = () => {
 
 
                     <div className="col-6">
-                        <textarea
-                            className={`form-control imput-base ${errors.description ? 'is-invalid' : ''}`}
-                            name="description"
-                            placeholder="Descrição"
-                            cols={30}
-                            rows={10}
-                            ref={register({ required: "Campo obrigatório" })}
+                        <DescriptionFilter
+                            control={control}
                         />
                         {errors.description && (
                             <div className="invalid-feedback d-block">
-                                {errors.description.message}
+                                {errors.description}
                             </div>
                         )}
                     </div>

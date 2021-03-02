@@ -8,6 +8,9 @@ import { makeRequest } from 'core/utils/request'
 import { Product } from 'core/types/Product'
 import ProductInfoLoader from '../Loaders/ProductInfoLoader'
 import ProductDescriptionLoader from '../Loaders/ProductDescriptionLoader'
+import { Editor } from 'react-draft-wysiwyg'
+import { EditorState } from 'draft-js'
+import { stateFromHTML } from 'draft-js-import-html'
 type ParamsType = {
     productId: string;
 }
@@ -24,6 +27,10 @@ const ProductDetails = () => {
             .finally(() => setIsLoading(false))
     }, [productId])
 
+    const convertDescriptionAsEditorState=(description?: string) =>{
+        const contentState = stateFromHTML(description || '');
+        return EditorState.createWithContent(contentState);
+    }
     return (
         <div className="product-details-container">
             <div className="card-base border-radius-20 product-details">
@@ -53,9 +60,13 @@ const ProductDetails = () => {
                             <h1 className="product-description-title">
                                 Descrição do Produto:
                         </h1>
-                            <p className="product-description-text">
-                                {product?.description}
-                            </p>
+                            
+                            <Editor
+                                editorClassName="product-description-text"
+                                editorState={convertDescriptionAsEditorState(product?.description)}
+                                toolbarHidden
+                                readOnly
+                            />
                         </div>
                     }
                 </div>
