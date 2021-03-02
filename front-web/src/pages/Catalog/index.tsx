@@ -6,6 +6,7 @@ import ProductCard from './components/ProductCard'
 import ProductCardLoader from './components/Loaders/ProductCardLoader';
 import Pagination from 'core/components/Pagination/index'
 import './styles.scss'
+import ProductFilter from 'core/components/ProductFilter';
 
 const Catalog = () => {
     const [productsResponse, setProductsResponse] = useState<ProductsResponse>();
@@ -27,7 +28,10 @@ const Catalog = () => {
 
     return (
         <div className="catalog-container">
-            <h1 className="catalog-title">Catálogo de Produtos</h1>
+            <div className="d-flex justify-content-between" >
+                <h1 className="catalog-title">Catálogo de Produtos</h1>
+                <ProductFilter/>
+            </div>
             <div className="catalog-produts">
 
                 {isLoading ? <ProductCardLoader /> : (

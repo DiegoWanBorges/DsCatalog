@@ -51,7 +51,6 @@ const ProductForm = () => {
                 .finally(() =>{
                     setIsLoadingCategories(false);
                 })
-
     }, [])
 
     
