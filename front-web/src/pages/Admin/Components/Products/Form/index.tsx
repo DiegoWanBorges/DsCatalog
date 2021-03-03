@@ -16,7 +16,7 @@ import {stateFromHTML} from 'draft-js-import-html';
 export type FormState = {
     name: string;
     price: string;
-    description: EditorState;
+    description: EditorState; 
     categories: Category[];
 }
 type ParamsType = {
