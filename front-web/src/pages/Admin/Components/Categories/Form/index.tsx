@@ -1,7 +1,5 @@
 import BaseForm from "../../BaseForm"
 
-
-
 const CategoryForm = () =>{
     return(
         <form>

@@ -4,6 +4,7 @@ import {  Switch } from 'react-router-dom'
 import Categories from './Components/Categories'
 import NavBarAdmin from './Components/NavBar'
 import Products from './Components/Products'
+import Users from './Components/Users'
 import './styles.scss'
 
 const Admin = () => (
@@ -18,7 +19,7 @@ const Admin = () => (
                     <Categories/>
                 </PrivateRoute>
                 <PrivateRoute path="/admin/users" allowedRoutes={['ROLE_ADMIN']} >
-                    <h1>Conteudo 3</h1>
+                    <Users/>
                 </PrivateRoute>                
             </Switch>
         </div>
