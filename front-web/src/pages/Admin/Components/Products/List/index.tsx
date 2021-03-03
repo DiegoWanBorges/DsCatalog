@@ -57,13 +57,14 @@ const ProductList = () => {
     }
 
     return (
-        <div className="admin-product-list">
+        <div >
             <button
                 className="btn btn-primary btn-lg"
                 onClick={handCreate}
             >
                 ADCIONAR
             </button>
+            
             <div className="admin-list-container">
                 {isLoading ? <CardLoader/> : (
                         productsResponse?.content.map(product => (
