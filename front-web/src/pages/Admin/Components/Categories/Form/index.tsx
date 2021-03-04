@@ -1,6 +1,5 @@
-import { Category } from "core/types/Product";
 import { makePrivateRequest, makeRequest } from "core/utils/request";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -13,7 +12,7 @@ type ParamsType = {
     categoryId: string;
 }
 const CategoryForm = () => {
-    const { register, handleSubmit, errors, setValue, control } = useForm<FormState>();
+    const { register, handleSubmit, errors, setValue } = useForm<FormState>();
     const history = useHistory();
     const { categoryId } = useParams<ParamsType>();
     const isEditing = categoryId !== 'create';
@@ -59,8 +58,8 @@ const CategoryForm = () => {
                         placeholder="Nome da categoria"
                         ref={register({
                             required: "Campo obrigatório",
-                            minLength: { value: 5, message: "O campo deve ter minímo 5 caracteres" },
-                            maxLength: { value: 60, message: "O campo deve ter no maximo 60 caracteres" },
+                            minLength: { value: 2, message: "O campo deve ter minímo 2 caracteres" },
+                            maxLength: { value: 20, message: "O campo deve ter no maximo 20 caracteres" },
                         })}
                     />
                     {errors.name && (

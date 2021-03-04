@@ -25,8 +25,9 @@ public class CategoryService {
 	private CategoryRepository repository;
 	
 	@Transactional(readOnly=true)
-	public Page<CategoryDTO> findAllPaged(PageRequest pageRequest){
-	Page<Category> list = repository.findAll(pageRequest);
+	public Page<CategoryDTO> findAllPaged(String name,PageRequest pageRequest){
+		String nameConcat = "%"+name+"%";
+		Page<Category> list =  repository.findByNameLikeIgnoreCase(nameConcat,pageRequest);
 		return list.map(x -> new CategoryDTO(x));
 		
 	}

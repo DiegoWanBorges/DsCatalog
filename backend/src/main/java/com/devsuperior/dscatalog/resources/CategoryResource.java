@@ -31,13 +31,14 @@ public class CategoryResource {
 	@GetMapping
 	public ResponseEntity<Page<CategoryDTO>> findAll(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "name", defaultValue = "") String  name,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction
 			){
 		PageRequest pageRequest = PageRequest.of(page,linesPerPage,Direction.valueOf(direction),orderBy);
 		
-		Page<CategoryDTO> list = service.findAllPaged(pageRequest);
+		Page<CategoryDTO> list = service.findAllPaged(name,pageRequest);
 				
 		return ResponseEntity.ok().body(list);
 	}

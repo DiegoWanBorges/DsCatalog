@@ -1,5 +1,6 @@
 import Pagination from 'core/components/Pagination';
-import { ProductsResponse } from 'core/types/Product';
+import ProductFilter from 'core/components/ProductFilter';
+import { Category, ProductsResponse } from 'core/types/Product';
 import { makePrivateRequest, makeRequest } from 'core/utils/request';
 import React, { useCallback, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
@@ -12,11 +13,18 @@ import './styles.scss'
 const ProductList = () => {
     const [productsResponse, setProductsResponse] = useState<ProductsResponse>();
     const [activePage, setActivePage] = useState(0);
-    const[isLoading,setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [name, setName] = useState('');
+    const [category, setCategory] = useState<Category>();
+
     const getProducts = useCallback(() => {
         const params = {
+            name: name,
+            categoryId: category?.id,
             page: activePage,
-            linesPerPage: 4
+            linesPerPage: 4,
+            orderBy:"id",
+            direction:"DESC"
         }
         setIsLoading(true)
         makeRequest({ url: '/products', params })
@@ -24,7 +32,7 @@ const ProductList = () => {
             .finally(() => {
                 setIsLoading(false);
             })
-    }, [activePage])
+    }, [activePage, category, name])
 
     useEffect(() => {
         getProducts();
@@ -39,7 +47,7 @@ const ProductList = () => {
 
     const onRemove = (productId: number) => {
         const confirm = window.confirm("Deseja excluir o produto selecionado?");
-        if (confirm){
+        if (confirm) {
             makePrivateRequest({
                 url: `/products/${productId}`,
                 method: 'DELETE'
@@ -55,26 +63,54 @@ const ProductList = () => {
                 })
         }
     }
+    const handleChangeName = (name: string) => {
+        setActivePage(0);
+        setName(name);
+    }
+    const handleChangeCategory = (category: Category) => {
+        setActivePage(0);
+        setCategory(category);
 
+    }
+    const clearFilters = () => {
+        setActivePage(0);
+        setCategory(undefined);
+        setName('');
+    }
     return (
         <div >
-            <button
-                className="btn btn-primary btn-lg"
-                onClick={handCreate}
-            >
-                ADCIONAR
-            </button>
-            
+            <div  >
+                <div className="list-container">
+                    <button
+                        className="btn btn-primary btn-lg btn-filter"
+                        onClick={handCreate}
+                    >
+                        ADCIONAR
+                    </button>
+                    <div className="list-filter">
+                        <ProductFilter
+                            name={name}
+                            category={category}
+                            handleChangeName={handleChangeName}
+                            handleChangeCategory={handleChangeCategory}
+                            clearFilters={clearFilters}
+                        />
+                    </div>
+
+
+                </div>
+            </div>
+
             <div className="admin-list-container">
-                {isLoading ? <CardLoader/> : (
-                        productsResponse?.content.map(product => (
-                            <Card
-                                product={product} key={product.id}
-                                onRemove={onRemove}
-                            />
-                        ))
+                {isLoading ? <CardLoader /> : (
+                    productsResponse?.content.map(product => (
+                        <Card
+                            product={product} key={product.id}
+                            onRemove={onRemove}
+                        />
+                    ))
                 )}
-                
+
                 {productsResponse &&
                     <Pagination
                         totalPages={productsResponse?.totalPages}

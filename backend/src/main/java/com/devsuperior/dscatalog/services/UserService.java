@@ -43,8 +43,9 @@ public class UserService implements UserDetailsService {
 	private RoleRepository roleRepository;
 	
 	@Transactional(readOnly=true)
-	public Page<UserDTO> findAllPaged(PageRequest pageRequest){
-	Page<User> list = repository.findAll(pageRequest);
+	public Page<UserDTO> findAllPaged(String firstName,PageRequest pageRequest){
+	String nameConcat ="%"+firstName+"%";
+	Page<User> list = repository.findByFirstNameLikeIgnoreCase(nameConcat,pageRequest);
 		return list.map(x -> new UserDTO(x));
 		
 	}
@@ -60,7 +61,6 @@ public class UserService implements UserDetailsService {
 			User entity = new User();
 			copyDtoToEntity(dto,entity);
 			entity.setPassword(passwordEncoder.encode(dto.getPassword()));
-			
 			return new UserDTO(repository.save(entity));
 	}
 	@Transactional

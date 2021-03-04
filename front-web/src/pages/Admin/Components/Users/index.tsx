@@ -10,7 +10,7 @@ const Users = () => {
                 <Route path="/admin/users" exact>
                     <UserList/>
                 </Route>
-                <Route path="/admin/users/:productId">
+                <Route path="/admin/users/:userId">
                     <UserForm/>
                 </Route>
             </Switch>

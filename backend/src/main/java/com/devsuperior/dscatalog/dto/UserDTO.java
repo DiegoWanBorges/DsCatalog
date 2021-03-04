@@ -19,19 +19,18 @@ public class UserDTO implements Serializable {
 	
 	@Email(message = "Formato de e-mail invalido")
 	private String email;
-		
+	
 	private List<RoleDTO> roles = new ArrayList<>();
 	
 	public UserDTO() {
 		
 	}
 
-	public UserDTO(Long id, String firstName, String lastName, String email) {
+	public UserDTO(Long id, String firstName, String lastName, String email,String password) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		
 	}
 	public UserDTO(User entity) {
 		this.id = entity.getId();

@@ -77,6 +77,7 @@ const Catalog = () => {
             {productsResponse &&
                 <Pagination
                     totalPages={productsResponse?.totalPages}
+                    
                     onChange={page => setActivePage(page)}
                 />
             }
