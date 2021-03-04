@@ -1,5 +1,4 @@
-# dscatalog-bootcamp-devsuperior
-
+# Bootcamp - Trilha Java-React
 Projeto principal do Bootcamp devsuperior.
 
 Acesse o projeto finalizado em: https://diegowanborges-dscatalog.netlify.app
