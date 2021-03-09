@@ -1,9 +1,9 @@
 .category-card-admin{
     display: flex;
+    flex-direction: row;
     margin-bottom: 20px;
     border-radius: 10px;
-    
-
+    padding: 15px 10px;
 }
 .category-card-name-admin{
     font-size: 18px;
@@ -11,4 +11,40 @@
     letter-spacing: -0.015em;
     color: #263238;
     padding-left:20px ;
+}
+.category-buttons-container{
+    width: 100%;
+    display: flex;
+    margin-top: 0;
+    align-items: center;
+    justify-content: space-around;
+}
+.btn-category{
+ border-radius: 10px;
+ width: 45%;
+}
+
+@media(max-width:576px){
+    .category-card-admin{
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-category{
+        width: 100%;
+        width: 135px !important;
+        margin: 0px !important;
+    }
+    .category-buttons-container{
+        width: 20%;
+        display: flex;
+        flex-direction: row !important;
+        align-items: center;
+        justify-content: space-around;
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+    .category-card-name-admin{
+        margin-bottom: 20px;
+    }
+    
 }

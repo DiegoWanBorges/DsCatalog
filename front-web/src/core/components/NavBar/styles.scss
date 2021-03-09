@@ -15,6 +15,7 @@
 .menu-mobile-btn{
     display: none;
 }
+
 .menu-container{
     width: 55%;
     display: flex;
@@ -52,10 +53,13 @@
 
 @media (max-width: 576px){
     .main-nav{
-        width: 100% i !important;
+        width: 100% !important;
         justify-content: space-between;
     }
-    .menu-container, .user-info-dnone{
+    .menu-container{
+        display: none;
+    }
+    .user-info-dnone{
         display: none;
     }
     .nav-logo-text{
@@ -85,6 +89,7 @@
         height: 150px;
         display: flex;
         align-items: flex-start;
+        flex: 1;
         flex-direction: column;
         top: 40px;
     }

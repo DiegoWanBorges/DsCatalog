@@ -1,10 +1,9 @@
 .user-card-admin{
     display: flex;
+    flex-direction: row;
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-radius: 10px;
-    
-
 }
 .user-card-name-admin{
     font-size: 18px;
@@ -12,7 +11,12 @@
     letter-spacing: -0.015em;
     color: #263238;
     padding-left:20px ;
+    margin-top: 20px;
     
+}
+.user-information{
+   width: 50%; 
+   padding-top: 20px;
 }
 .user-card-email-admin{
     font-size: 16px;
@@ -20,4 +24,42 @@
     letter-spacing: -0.015em;
     color: #9E9E9E;
     padding-left:20px ;
+}
+.btn-container-user{
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    align-items: center; 
+    justify-content: space-around;
+}
+.btn-user{
+    border-radius: 10px;
+    width: 45%;
+   }
+@media(max-width:576px){
+    .user-card-admin{
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-user{
+        width: 100%;
+        width: 135px !important;
+        margin: 0px !important;
+    }
+    .btn-container-user{
+        width: 20%;
+        display: flex;
+        flex-direction: row !important;
+        align-items: center;
+        justify-content: space-around;
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+    .user-card-name-admin{
+        margin-bottom: 20px;
+    }
+    .user-card-email-admin{
+        
+    }
+    
 }

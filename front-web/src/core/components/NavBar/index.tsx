@@ -6,6 +6,7 @@ import './styles.scss';
 
 const NavBar = () => {
     const [drawerActive, setDrawerActive] = useState(false);
+
     const [currentUser, setCurrentUser] = useState('');
     const location = useLocation();
     const handleLogout = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -36,20 +37,21 @@ const NavBar = () => {
             <div className={drawerActive ? "menu-mobile-container" : "menu-container"}>
                 <ul className="main-menu">
                     <li >
-                        <NavLink className="nav-link" to="/" exact onClick={() => setDrawerActive(!drawerActive)}>
+                        <NavLink className="nav-link" to="/" exact onClick={() => setDrawerActive(false)}>
                             HOME
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink className="nav-link" to="/products" onClick={() => setDrawerActive(!drawerActive)}>
+                        <NavLink className="nav-link" to="/products" onClick={() => setDrawerActive(false)}>
                             CATÁLOGO
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink className="nav-link" to="/admin" onClick={() => setDrawerActive(!drawerActive)} >
+                        <NavLink className="nav-link" to="/admin" onClick={() => setDrawerActive(false)} >
                             ADMIN
                         </NavLink>
                     </li>
+                    
                     {drawerActive && (
                         <li>
                             {
@@ -60,7 +62,7 @@ const NavBar = () => {
                                         onClick={
                                             (e) => {
                                                 handleLogout(e);
-                                                setDrawerActive(!drawerActive)
+                                                setDrawerActive(false)
                                             }
                                         }
                                     >
@@ -69,8 +71,7 @@ const NavBar = () => {
                                 )
                             }
                         </li>
-                    )
-                    }
+                    )}
 
                     {drawerActive && (
                         <>
@@ -79,7 +80,7 @@ const NavBar = () => {
                                     <Link
                                         className="nav-link active"
                                         to="/auth/login"
-                                        onClick={() => setDrawerActive(!drawerActive)}
+                                        onClick={() => setDrawerActive(false)}
                                     >
                                         LOGIN
                                     </Link>
@@ -90,17 +91,18 @@ const NavBar = () => {
                     )}
                 </ul>
             </div>
+          
             <div className="user-info-dnone text-right">
                 {currentUser && (
                     <>
                         {currentUser}
                         <a
-                            href="RRR"
+                            href="#logout"
                             className="nav-link active d-inline"
                             onClick={
                                 (e) => {
                                     handleLogout(e);
-                                    setDrawerActive(!drawerActive)
+                                    setDrawerActive(false);
                                 }
                             }
                         >
@@ -110,7 +112,10 @@ const NavBar = () => {
                 )}
                 {!currentUser && (
                     <Link
-                        className="nav-link active" to="/auth/login" onClick={() => setDrawerActive(!drawerActive)}>
+                        className="nav-link active" 
+                        to="/auth/login" 
+                        onClick={() => setDrawerActive(false)}
+                    >
                         LOGIN
                     </Link>
                 )}

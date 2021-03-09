@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import BaseForm from "../../BaseForm"
+import './styles.scss'
 
 export type FormState = {
     name: string;
@@ -50,11 +51,11 @@ const CategoryForm = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)}  >
             <BaseForm tittle="CADASTRAR UMA CATEGORIA">
-                <div className="row col-6">
+                <div className="form-container-category">
                     <input
                         type="text"
                         name="name"
-                        className={`form-control imput-base ${errors.name ? 'is-invalid' : ''}`}
+                        className={`form-control imput-category imput-base ${errors.name ? 'is-invalid' : ''}`}
                         placeholder="Nome da categoria"
                         ref={register({
                             required: "Campo obrigatório",

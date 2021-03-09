@@ -10,8 +10,8 @@ type Props ={
 
 const CategoryFilter = ({ name,handleChangeName,clearFilters }:Props) => {
     return (
-        <div className="card-base product-filters-container">
-            <div className="input-search">
+        <div className="card-base category-filters-container">
+            <div className="category-input-search">
                 <input
                     type="text"
                     className="form-control"
@@ -23,7 +23,7 @@ const CategoryFilter = ({ name,handleChangeName,clearFilters }:Props) => {
             </div>
             
             <button 
-                    className="btn btn-outline-secondary"
+                    className="btn btn-outline-secondary category-btn-filter-clean"
                     onClick={clearFilters}
             >
                 LIMPAR FILTRO

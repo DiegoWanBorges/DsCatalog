@@ -23,8 +23,8 @@ const ProductList = () => {
             categoryId: category?.id,
             page: activePage,
             linesPerPage: 4,
-            orderBy:"id",
-            direction:"DESC"
+            orderBy: "id",
+            direction: "DESC"
         }
         setIsLoading(true)
         makeRequest({ url: '/products', params })
@@ -79,27 +79,24 @@ const ProductList = () => {
     }
     return (
         <div >
-            <div  >
-                <div className="list-container">
-                    <button
-                        className="btn btn-primary btn-lg btn-filter"
-                        onClick={handCreate}
-                    >
-                        ADCIONAR
-                    </button>
-                    <div className="list-filter">
-                        <ProductFilter
-                            name={name}
-                            category={category}
-                            handleChangeName={handleChangeName}
-                            handleChangeCategory={handleChangeCategory}
-                            clearFilters={clearFilters}
-                        />
-                    </div>
-
-
+            <div className="list-container">
+                <button
+                    className="btn btn-primary btn-lg btn-filter"
+                    onClick={handCreate}
+                >
+                    ADCIONAR
+                </button>
+                <div className="list-filter">
+                    <ProductFilter
+                        name={name}
+                        category={category}
+                        handleChangeName={handleChangeName}
+                        handleChangeCategory={handleChangeCategory}
+                        clearFilters={clearFilters}
+                    />
                 </div>
-            </div>
+        </div>
+
 
             <div className="admin-list-container">
                 {isLoading ? <CardLoader /> : (

@@ -34,12 +34,13 @@ const Card = ({ product, onRemove }: Props) => {
                 </div>
             </div>
             <div className="buttons-container">
+                
                 <Link
                     to={`/admin/products/${product.id}`}
                     type="button"
                     className="btn btn-outline-secondary btn-block border-radius-10  btn-edit btn-product">
                     EDITAR
-                    </Link>
+                </Link>
 
                 <button
                     type="button"

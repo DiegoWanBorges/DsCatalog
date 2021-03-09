@@ -34,7 +34,7 @@ const ProductFilter = ({ name,category,handleChangeName,handleChangeCategory,cle
                 <input
                     type="text"
                     className="form-control"
-                    placeholder="Pesquisar Produto"
+                    placeholder="Pesquisar produto"
                     onChange={event => handleChangeName(event.target.value)}
                     value={name}
                 />

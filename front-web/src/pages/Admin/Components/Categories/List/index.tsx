@@ -11,7 +11,7 @@ import './styles.scss'
 const CategoryList = () => {
     const [categoriesResponse, setCategoriesResponse] = useState<CategoriesResponse>();
     const [activePage, setActivePage] = useState(0);
-    
+
     const history = useHistory();
     const [name, setName] = useState('');
 
@@ -21,16 +21,16 @@ const CategoryList = () => {
             page: activePage,
             linesPerPage: 4,
             name: name,
-            orderBy:"id",
-            direction:"DESC"
+            orderBy: "id",
+            direction: "DESC"
         }
-        
+
         makeRequest({ url: '/categories', params })
             .then(response => setCategoriesResponse(response.data))
             .finally(() => {
-        
+
             })
-    }, [activePage,name])
+    }, [activePage, name])
 
     useEffect(() => {
         getCategories();
@@ -71,13 +71,13 @@ const CategoryList = () => {
         <div >
             <div className="admin-category-list">
                 <button
-                    className="btn btn-primary btn-lg"
+                    className="btn btn-primary btn-lg btn-filter-category"
                     onClick={handCreate}
                 >
                     ADCIONAR
-            </button>
+                </button>
 
-            <div className="list-filter">
+                <div className="list-filter-category">
                     <CategoryFilter
                         name={name}
                         handleChangeName={handleChangeName}

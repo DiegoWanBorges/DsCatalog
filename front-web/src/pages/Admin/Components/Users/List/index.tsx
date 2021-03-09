@@ -70,15 +70,15 @@ const UserList = () => {
     return (
         <div >
              
-            <div className="admin-category-list">
+            <div className="admin-user-list"> 
                 <button
-                    className="btn btn-primary btn-lg"
+                    className="btn btn-primary btn-lg btn-filter-user"
                     onClick={handCreate}
                 >
                     ADCIONAR
             </button>
 
-            <div className="list-filter">
+            <div className="list-filter-user">
                     <UserFilter
                         name={name}
                         handleChangeName={handleChangeName}

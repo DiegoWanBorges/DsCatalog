@@ -7,16 +7,16 @@ type Props ={
     handleChangeName: (name:string) => void;
     clearFilters: () => void;
 }
-
+ 
 const UserFilter = ({ name,handleChangeName,clearFilters }:Props) => {
     
     return (
-        <div className="card-base product-filters-container">
-            <div className="input-search">
+        <div className="card-base user-filters-container">
+            <div className="input-search-user">
                 <input
                     type="text"
                     className="form-control"
-                    placeholder="Pesquisar Usuários"
+                    placeholder="Pesquisar usuários"
                     onChange={event => handleChangeName(event.target.value)}
                     value={name}
                 />
@@ -24,7 +24,7 @@ const UserFilter = ({ name,handleChangeName,clearFilters }:Props) => {
             </div>
             
             <button 
-                    className="btn btn-outline-secondary"
+                    className="btn btn-outline-secondary user-btn-filter-clean"
                     onClick={clearFilters}
             >
                 LIMPAR FILTRO
