@@ -27,7 +27,7 @@ const ProductDetails = () => {
             .finally(() => setIsLoading(false))
     }, [productId])
 
-    const convertDescriptionAsEditorState=(description?: string) =>{
+    const convertDescriptionAsEditorState = (description?: string) => {
         const contentState = stateFromHTML(description || '');
         return EditorState.createWithContent(contentState);
     }
@@ -38,37 +38,42 @@ const ProductDetails = () => {
                     <ArrowIcon className="icon-goback" />
                     <h1 className="text-goback">VOLTAR</h1>
                 </Link>
-                <div className="row">
-                    {isLoading ? <ProductInfoLoader /> :
+                <div className="product-details-info">
+                    <div className="col-6 pr-5">
+                        {isLoading ? <ProductInfoLoader /> :
+                            <>
+                                <div className="product-details-card text-center">
+                                    <img src={product?.imgUrl} alt="" className="product-details-image" />
+                                </div>
+                                <div className="product-info-fields">
+                                    <h1 className="product-details-name">
+                                        {product?.name}
+                                    </h1>
+                                    {product?.price && <ProductPrice price={product?.price} />
+                                    }
+                                </div>
 
-                        <div className="col-6 pr-5">
-                            <div className="product-details-card text-center">
+                            </>
+                        }
+                    </div>
 
-                                <img src={product?.imgUrl} alt="" className="product-details-image" />
+                    <div className="product-details-card">
+                        {isLoading ? <ProductDescriptionLoader /> :
+                            <>
+                                <h1 className="product-description-title">
+                                    Descrição do Produto:
+                                </h1>
 
-                            </div>
-                            <h1 className="product-details-name">
-                                {product?.name}
-                            </h1>
-                            {product?.price && <ProductPrice price={product?.price} />}
-                        </div>
-                    }
+                                <Editor
+                                    editorClassName="product-description-text"
+                                    editorState={convertDescriptionAsEditorState(product?.description)}
+                                    toolbarHidden
+                                    readOnly
+                                />
+                            </>
+                        }
+                    </div>
 
-                    {isLoading ? <ProductDescriptionLoader /> :
-
-                        <div className="col-6 product-details-card">
-                            <h1 className="product-description-title">
-                                Descrição do Produto:
-                        </h1>
-                            
-                            <Editor
-                                editorClassName="product-description-text"
-                                editorState={convertDescriptionAsEditorState(product?.description)}
-                                toolbarHidden
-                                readOnly
-                            />
-                        </div>
-                    }
                 </div>
             </div>
         </div>

@@ -1,11 +1,10 @@
 import { isAllowedByRole } from 'core/utils/auth';
-import React from 'react'
 import {  NavLink } from 'react-router-dom';
 import './styles.scss'
 
 
-const NavBarAdmin = () => (
-    <nav className="admin-nav-container">
+const NavBarAdmin = () => ( 
+    <nav className="admin-nav-container"> 
         <ul>
             <li>
                 <NavLink to="/admin/products" className="admin-nav-item">Meus Produtos</NavLink>

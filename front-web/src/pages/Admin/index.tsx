@@ -13,7 +13,7 @@ const Admin = () => (
         <div className="admin-content">
             <Switch>
                 <PrivateRoute path="/admin/products" >
-                    <Products/>
+                <Products/>
                 </PrivateRoute>
                 <PrivateRoute path="/admin/categories">
                     <Categories/>

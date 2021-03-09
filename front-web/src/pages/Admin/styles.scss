@@ -1,5 +1,5 @@
 .admin-container{
-    display: flex;
+    display: flex ;
 }
 .admin-content{
     padding: 25px 40px 45px 40px;
@@ -10,4 +10,11 @@
 }
 .btn-edit{
     color: #9E9E9E;
+}
+
+@media(max-width:768px){
+    .admin-container{
+        flex-direction: column;
+    }
+   
 }

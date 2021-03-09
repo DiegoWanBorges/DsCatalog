@@ -51,9 +51,9 @@ const Catalog = () => {
         setName('');
     }
 
-    return (
+    return ( 
         <div className="catalog-container">
-            <div className="d-flex justify-content-between" >
+            <div className="filter-container" >
                 <h1 className="catalog-title">Catálogo de Produtos</h1>
                 <ProductFilter
                     name={name}
