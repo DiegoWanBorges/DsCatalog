@@ -23,7 +23,7 @@ const Home = () => (
                 <div className="col-6">
                     <MainImage className="main-image" />
                 </div>
-            </div>
+            </div> 
         </div>
     </>
 );

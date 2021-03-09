@@ -14,7 +14,7 @@ const NavBarAdmin = () => (
             </li>
             {isAllowedByRole(['ROLE_ADMIN']) && (
                 <li>
-                    <NavLink to="/admin/users" className="admin-nav-item">Meus Usuário</NavLink>
+                    <NavLink to="/admin/users" className="admin-nav-item">Meus Usuários</NavLink>
                 </li>
             )}
         </ul>

@@ -20,7 +20,7 @@ const BaseForm = ({tittle, children}:Props) => {
                 {tittle}
             </h1>
             
-            {children}
+            {children} 
 
             <div className="base-form-actions">
                 <button 

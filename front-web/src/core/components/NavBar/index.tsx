@@ -36,17 +36,17 @@ const NavBar = () => {
             <div className={drawerActive ? "menu-mobile-container" : "menu-container"}>
                 <ul className="main-menu">
                     <li >
-                        <NavLink className="nav-link" to="/" exact onClick={() =>setDrawerActive(!drawerActive)}>
+                        <NavLink className="nav-link" to="/" exact onClick={() => setDrawerActive(!drawerActive)}>
                             HOME
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink className="nav-link" to="/products" onClick={() =>setDrawerActive(!drawerActive)}>
+                        <NavLink className="nav-link" to="/products" onClick={() => setDrawerActive(!drawerActive)}>
                             CATÁLOGO
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink className="nav-link" to="/admin" onClick={() =>setDrawerActive(!drawerActive)} >
+                        <NavLink className="nav-link" to="/admin" onClick={() => setDrawerActive(!drawerActive)} >
                             ADMIN
                         </NavLink>
                     </li>
@@ -54,7 +54,16 @@ const NavBar = () => {
                         <li>
                             {
                                 currentUser && (
-                                    <a href="#logout" className="nav-link active d-inline" onClick={() =>setDrawerActive(!drawerActive)}>
+                                    <a
+                                        href="#logout"
+                                        className="nav-link active d-inline"
+                                        onClick={
+                                            (e) => {
+                                                handleLogout(e);
+                                                setDrawerActive(!drawerActive)
+                                            }
+                                        }
+                                    >
                                         {`LOGOUT - ${currentUser}`}
                                     </a>
                                 )
@@ -68,10 +77,10 @@ const NavBar = () => {
                             {!currentUser && (
                                 <li>
                                     <Link
-                                        className="nav-link active" 
+                                        className="nav-link active"
                                         to="/auth/login"
-                                        onClick={() =>setDrawerActive(!drawerActive)}
-                                        >
+                                        onClick={() => setDrawerActive(!drawerActive)}
+                                    >
                                         LOGIN
                                     </Link>
                                 </li>
@@ -101,7 +110,7 @@ const NavBar = () => {
                 )}
                 {!currentUser && (
                     <Link
-                        className="nav-link active" to="/auth/login" onClick={() =>setDrawerActive(!drawerActive)}>
+                        className="nav-link active" to="/auth/login" onClick={() => setDrawerActive(!drawerActive)}>
                         LOGIN
                     </Link>
                 )}

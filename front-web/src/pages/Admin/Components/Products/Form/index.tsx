@@ -93,7 +93,7 @@ const ProductForm = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)}  >
             <BaseForm tittle= {isEditing ? 'EDITAR PRODUTO': 'CADASTRAR PRODUTO'}>
-                <div className="row">
+                <div className="product-form-container">
                     <div className="col-6">
                         <div className="margin-bottom-30">
                             <input
@@ -101,7 +101,7 @@ const ProductForm = () => {
                                 name="name"
                                 className={`form-control imput-base ${errors.name ? 'is-invalid' : ''}`}
                                 placeholder="Nome do produto"
-                                ref={register({
+                                ref={register({ 
                                     required: "Campo obrigatório",
                                     minLength: { value: 5, message: "O campo deve ter minímo 5 caracteres" },
                                     maxLength: { value: 60, message: "O campo deve ter no maximo 60 caracteres" },
@@ -171,7 +171,7 @@ const ProductForm = () => {
                     </div>
 
 
-                    <div className="col-6">
+                    <div className="description-filter-container">
                         <DescriptionFilter
                             control={control}
                         />

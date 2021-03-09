@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
 const Auth = () =>{
     return (
-        <div className="auth-container">
+        <div className="auth-container"> 
             <div className="auth-info">
                 <h1 className="auth-info-title">
                     Divulgue seus produtos <br/> no DS Catalog

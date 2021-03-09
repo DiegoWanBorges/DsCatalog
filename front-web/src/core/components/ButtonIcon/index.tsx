@@ -5,10 +5,10 @@ import { ReactComponent as ArrowIcon } from '../../assets/images/arrow.svg'
 type Props = {
     text: string;
 
-}
+} 
 
 const ButtonIcon = ({ text } : Props)  => (
-    <div className="d-flex">
+    <div className="default-button">
         <button className="btn btn-primary btn-icon">  
         {text}
         </button>
