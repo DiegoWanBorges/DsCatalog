@@ -5,4 +5,9 @@ export type Product={
     description:string;
     imgUrl:string;
     price:number;
+    categories:Category[];
+}
+export type Category={
+    id:number;
+    name:string;
 }

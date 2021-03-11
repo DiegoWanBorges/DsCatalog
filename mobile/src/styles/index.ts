@@ -155,6 +155,11 @@ const theme = StyleSheet.create({
         width:140,
         height:140,
         margin:15
+    },
+    productImgDetails:{
+        width:270,
+        height:270,
+        margin:15
     }
     
 
