@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { ceil, color } from 'react-native-reanimated'
 
 const colors ={
     white: "#FFF",
@@ -13,8 +14,27 @@ const colors ={
 }
 
 const text = StyleSheet.create({
-    regular:{ },
-    bold:{ },
+    regular:{ 
+        fontSize: 16,
+        fontWeight:"400",
+        textAlign: "center",
+        color: colors.mediumGray,
+    },
+    bold:{ 
+        fontSize:26,
+        fontWeight:"bold",
+        textAlign:"center",
+        marginBottom:15,
+        color:colors.darkGray,
+    },
+    primaryText:{
+        fontSize:14,
+        fontWeight:"bold",
+        color:colors.white,
+        marginLeft:20,
+
+    },
+
 })
 
 const theme = StyleSheet.create({
@@ -37,13 +57,32 @@ const theme = StyleSheet.create({
         },
         shadowOpacity:0.25,
         shadowRadius:3.84,
+        justifyContent: "space-between"
     },
     draw:{
         width:313,
         height:225
     },
     textContainer:{
-        
+        paddingHorizontal: 20,
+    },
+    primaryButton:{
+        backgroundColor:colors.primary,
+        width:290,
+        height:50,
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+        borderRadius:10
+    },
+    arrowContainer:{
+        backgroundColor:colors.secondary,
+        height:50,
+        width:50,
+        borderTopRightRadius:10,
+        borderBottomRightRadius:10,
+        justifyContent:"center",
+        alignItems:"center",
     },
 })
 
