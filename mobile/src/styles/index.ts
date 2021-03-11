@@ -150,6 +150,11 @@ const theme = StyleSheet.create({
         height:40,
         borderBottomWidth:0.5,
         borderBottomColor: colors.borderGray,
+    },
+    productImg:{
+        width:140,
+        height:140,
+        margin:15
     }
     
 

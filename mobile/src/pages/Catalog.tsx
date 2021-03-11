@@ -1,56 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import {View, Text, ScrollView} from 'react-native'
+import {View, Text, ScrollView, ActivityIndicator} from 'react-native'
 import { ProductCard, SearchInput }  from '../components'
-import productImg from '../assets/images/computer.png'
 import { theme } from '../styles'
+import { makeRequest } from '../services'
+import { Product } from '../@types'
 
-const products  = [
-    {
-        id:1,
-        imgUrl:productImg,
-        name:"Mapa",
-        description:"The best computer in 2021",
-        price:2279.0
-    },
-    {
-        id:2,
-        imgUrl:productImg,
-        name:"Computador Desktop - Intel Core i7",
-        description:"The best computer in 2021",
-        price:2279.0
-    },
-    {
-        id:3,
-        imgUrl:productImg,
-        name:"Computador Desktop - Intel Core i7",
-        description:"The best computer in 2021",
-        price:2279.0
-    },
-    {
-        id:4,
-        imgUrl:productImg,
-        name:"Computador Desktop - Intel Core i7",
-        description:"The best computer in 2021",
-        price:2279.0
-    },
-    {
-        id:5,
-        imgUrl:productImg,
-        name:"Computador Desktop - Intel Core i7",
-        description:"The best computer in 2021",
-        price:2279.0
-    },
-]
+const params = {
+    linesPerPage: 1000,
+}
 
 const Catalog: React.FC = ()  =>{
     const [search,setSearch]=useState('');
-
+    const [products,setProducts] = useState<Product[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
     const data = search.length > 0 
     ? products.filter((product) =>
         product.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
     )
     : products;
+
+    async function fillProducts() {
+        setIsLoading(true)
+      await  makeRequest({ url: '/products',params })
+            .then(response => setProducts(response.data.content))
+            .finally(() => {
+                 setIsLoading(false)
+            })
+    }
+
+    useEffect(()=>{
+        fillProducts()
+    },[]);
 
     return (
         <ScrollView contentContainerStyle={theme.scrollContainer}>
@@ -59,11 +40,14 @@ const Catalog: React.FC = ()  =>{
                     search={search}
                     setSearch={setSearch}
             />
+           
             {
-                data.map(product =>(
-                    <ProductCard {...product} />
-                ))
-            }
+                isLoading ?  (
+                <ActivityIndicator size="large" />
+                ) : 
+                (data.map((product) => (
+                    <ProductCard { ...product} />
+                )))}
         </ScrollView>
         
     )
