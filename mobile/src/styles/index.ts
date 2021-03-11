@@ -10,7 +10,8 @@ const colors ={
     primary:"#407BEE",
     secondary:"#33569B",
     bluePill:"#407BFF61",
-    red:"#DF5753"
+    red:"#DF5753",
+    borderGray: "#E1E1E1",
 }
 
 const text = StyleSheet.create({
@@ -34,6 +35,21 @@ const text = StyleSheet.create({
         marginLeft:20,
 
     },
+    productName:{
+        fontSize:16,
+        fontWeight:"bold",
+    },
+    currency:{
+        fontSize:16,
+        fontWeight:"400",
+        color:colors.mediumGray
+    },
+    producPrice:{
+        fontSize:30,
+        fontWeight: "bold",
+        color:colors.primary
+        
+    }
 
 })
 
@@ -84,6 +100,59 @@ const theme = StyleSheet.create({
         justifyContent:"center",
         alignItems:"center",
     },
+    scrollContainer:{
+        padding: 10,
+    },
+    productCard:{
+        width:"100%",
+        backgroundColor:colors.white,
+        borderRadius:10,
+        shadowColor:colors.black,
+        shadowOffset:{
+            width:0,
+            height:2,
+        },
+        shadowOpacity:0.25,
+        shadowRadius:3.84,
+        marginVertical:10,
+        alignItems:"center",
+        justifyContent:"space-around",
+    },
+    productDescription:{
+        width:"100%",
+        padding:20,
+        borderTopColor: colors.lightGray,
+        borderTopWidth:1,
+
+    },
+    priceContainer:{
+        flexDirection:"row",
+        marginTop:10,
+    },
+    inputContainer:{
+        width:"100%",
+        height:60,
+        backgroundColor:colors.white,
+        borderRadius:10,
+        shadowColor:colors.black,
+        shadowOffset:{
+            width:0,
+            height:2,
+        },
+        shadowOpacity:0.25,
+        shadowRadius:3.84,
+        marginVertical:12.5,
+        paddingVertical:10,
+        
+    },
+    searchInput:{
+        width:"90%",
+        height:40,
+        borderBottomWidth:0.5,
+        borderBottomColor: colors.borderGray,
+    }
+    
+
 })
 
 export { colors, theme, text }
