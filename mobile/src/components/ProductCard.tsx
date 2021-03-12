@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/core';
 import React from 'react'
 
 import {View, Text, ImageSourcePropType, TouchableOpacity, Image} from 'react-native'
-import { Product } from '../@types';
 import { text, theme } from '../styles';
+import { Product } from '../utils/types';
 
 
 const ProductCard: React.FC<Product> = (product : Product)  =>{

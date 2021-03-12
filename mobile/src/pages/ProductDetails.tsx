@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
 import { theme, text } from '../styles'
 import { useNavigation } from '@react-navigation/core';
-import { Product } from '../@types';
+
 import { makeRequest } from '../services';
 
 import arrow from '../assets/images/leftArrow.png'
+import { Product } from '../utils/types';
 const ProductDetails = ({ route: { params: { id } } }) => {
     const [loading, setLoading] = useState(false);
     const [product, setProduct] = useState<Product>();
-
+    const navigation = useNavigation();
     useEffect(() => {
         setLoading(true);
         makeRequest({ url: `/products/${id}` })
@@ -21,25 +22,25 @@ const ProductDetails = ({ route: { params: { id } } }) => {
 
 
     return (
-            <View > 
+            <View style={theme.detailContainer}> 
                 {
                     loading ? (<ActivityIndicator size="large"/>) :
                     (
-                        <View>
-                            <TouchableOpacity>
+                        <View style={theme.detailCard}> 
+                            <TouchableOpacity style={theme.goBackContainer} onPress={() =>navigation.goBack()}>
                                 <Image source={arrow} />
-                                <Text>VOLTAR</Text>
+                                <Text style={text.goBackText}>VOLTAR</Text>
                             </TouchableOpacity>
-                            <View>
-                                <Image source={{uri:product?.imgUrl}}  />
+                            <View  style={theme.productImageContainer}>
+                                <Image source={{uri:product?.imgUrl}} style={theme.productImage}  />
                             </View>
-                            <Text>{product?.name}</Text>
-                            <View>
-                                <Text>R$</Text>
-                                <Text>{product?.price}</Text>
+                            <Text style={text.productDetailsTitle}>{product?.name}</Text>
+                            <View style={theme.priceContainer}>
+                                <Text style={text.currency}>R$</Text>
+                                <Text style={text.producPrice}>{product?.price}</Text>
                             </View>
-                            <ScrollView>
-                                <Text>
+                            <ScrollView style={theme.scrollTextContainer}>
+                                <Text style={text.productDescription}>
                                     {product?.description}
                                 </Text>
                             </ScrollView>

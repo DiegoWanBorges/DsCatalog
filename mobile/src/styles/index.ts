@@ -47,8 +47,25 @@ const text = StyleSheet.create({
     producPrice:{
         fontSize:30,
         fontWeight: "bold",
-        color:colors.primary
+        color:colors.primary,
         
+    },
+    goBackText:{
+        fontSize:18,
+        fontWeight:"bold",
+        color:colors.darkGray,
+        margin:16,
+    },
+    productDetailsTitle:{
+        fontSize:30,
+        fontWeight:"bold",
+        marginTop:10,
+        color:colors.darkGray
+    },
+    productDescription:{
+        fontSize:16,
+        fontWeight:"400",
+        color:colors.mediumGray,
     }
 
 })
@@ -65,7 +82,6 @@ const theme = StyleSheet.create({
         height: '100%',
         backgroundColor: colors.white,
         borderRadius:20,
-        alignItems:'center',
         shadowColor:colors.black,
         shadowOffset:{
             width:0,
@@ -73,7 +89,8 @@ const theme = StyleSheet.create({
         },
         shadowOpacity:0.25,
         shadowRadius:3.84,
-        justifyContent: "space-between"
+        alignItems:'center',
+        justifyContent: "space-around"
     },
     draw:{
         width:313,
@@ -160,9 +177,50 @@ const theme = StyleSheet.create({
         width:270,
         height:270,
         margin:15
-    }
-    
-
+    },
+    detailContainer:{
+        backgroundColor:colors.white,
+        padding:20,
+    },
+    detailCard:{
+        width: '100%',
+        height: '100%',
+        backgroundColor: colors.white,
+        borderRadius:20,
+        shadowColor:colors.black,
+        shadowOffset:{
+            width:0,
+            height:2
+        },
+        shadowOpacity:0.25,
+        shadowRadius:3.84,
+        justifyContent: "space-around",
+    },
+    productImageContainer:{
+        width:"100%",
+        borderWidth:1,
+        borderColor: colors.lightGray,
+        alignItems:"center",
+        borderRadius:20,
+    },
+    productImage:{
+        width:200,
+        height:200,
+    },
+    goBackContainer:{
+        width:290,
+        flexDirection:'row',
+        alignItems:"center",
+        marginVertical:10,
+        justifyContent:'flex-start',
+    },
+    scrollTextContainer:{
+        height:"100%",
+        padding:20,
+        borderWidth:0.5,
+        borderRadius:10,
+        borderColor: colors.darkGray,
+    },
 })
 
 export { colors, theme, text }

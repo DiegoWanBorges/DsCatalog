@@ -4,7 +4,7 @@ import { View, Text, ScrollView, ActivityIndicator } from 'react-native'
 import { ProductCard, SearchInput } from '../components'
 import { theme } from '../styles'
 import { makeRequest } from '../services'
-import { Product } from '../@types'
+import { Product } from '../utils/types'
 
 const params = {
     linesPerPage: 1000,
