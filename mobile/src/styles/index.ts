@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native'
-import { ceil, color } from 'react-native-reanimated'
+import { StyleSheet, Dimensions } from 'react-native'
+
+
+const deviceWidth = Dimensions.get('window').width;
 
 const colors ={
     white: "#FFF",
@@ -223,4 +225,34 @@ const theme = StyleSheet.create({
     },
 })
 
-export { colors, theme, text }
+const nav = StyleSheet.create({
+    leftText:{
+        color:colors.white,
+        fontWeight:"bold",
+        marginLeft:20,
+    },
+    drawer:{
+        marginRight:20,
+    },
+    options:{
+        width: deviceWidth,
+        backgroundColor: colors.primary,
+        height:120,
+        marginTop: 125,
+        marginRight:-20,
+        padding:20,
+        justifyContent:"space-between",  
+    },
+    option:{
+        paddingVertical:5,
+    },
+    textOption:{
+        color:colors.white,
+        textTransform:"uppercase",
+    },
+    textActive:{
+        fontWeight:"bold"
+    },
+})
+
+export { colors, theme, text, nav }
