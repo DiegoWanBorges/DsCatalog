@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { tabbar } from '../styles'
 import { useNavigation } from '@react-navigation/core';
+
 type Props={
     screen?:string;
     setScreen: Function;

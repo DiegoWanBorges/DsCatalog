@@ -43,7 +43,7 @@ const Catalog: React.FC = () => {
                 ) :
                     (data.map((product) => (
 
-                        <ProductCard key={product.id} {...product} />
+                        <ProductCard key={product.id} product={product} />
                     )))}
         </ScrollView>
 

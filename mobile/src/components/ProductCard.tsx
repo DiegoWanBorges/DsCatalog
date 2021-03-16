@@ -1,12 +1,16 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react'
 
-import {View, Text, ImageSourcePropType, TouchableOpacity, Image} from 'react-native'
+import {View, Text,  TouchableOpacity, Image} from 'react-native'
 import { text, theme } from '../styles';
 import { Product } from '../utils/types';
 
+type Props={
+    product:Product;
+    role?:string;
+}
 
-const ProductCard: React.FC<Product> = (product : Product)  =>{
+const ProductCard: React.FC<Props> = ({product, role }:Props)  =>{
     const navigation = useNavigation();
     const id = product.id;
     return (
@@ -22,6 +26,20 @@ const ProductCard: React.FC<Product> = (product : Product)  =>{
                     <Text style={text.producPrice}>{product.price}</Text>
                 </View>
             </View>
+            {
+                role ==="admin" && (
+                    <View style={theme.buttonContainer}>
+                        <TouchableOpacity style={theme.deleteBtn}>
+                            <Text style={text.deleteTxt}>Excluir</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={theme.editBtn}>
+                            <Text style={text.editTxt}>Editar</Text>
+                        </TouchableOpacity>
+                        
+                    </View>
+                    )
+                
+            }
         </TouchableOpacity>
     )
 }

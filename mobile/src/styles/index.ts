@@ -78,6 +78,21 @@ const text = StyleSheet.create({
     },
     logoutText:{
         color:colors.white,
+    },
+    addButtonText:{
+        color: colors.white,
+        textTransform:"uppercase",
+        fontWeight:"bold"
+    },
+    deleteTxt:{
+        textTransform:"uppercase",
+        fontWeight:"bold",
+        color:colors.red,
+    },
+    editTxt:{
+        textTransform:"uppercase",
+        fontWeight:"bold",
+        color:colors.mediumGray,
     }
 })
 
@@ -267,8 +282,32 @@ const theme = StyleSheet.create({
     toggle:{
         marginLeft:-40
     },
-    
-
+    buttonContainer:{
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"space-between"
+    },
+    deleteBtn:{
+        width:"40%",
+        height:40,
+        borderWidth:1,
+        borderColor: colors.red,
+        marginVertical:10,
+        alignItems:"center",
+        justifyContent:"center",
+        borderRadius:10
+    },
+    editBtn:{
+        width:"40%",
+        height:40,
+        borderWidth:1,
+        borderColor: colors.mediumGray,
+        marginVertical:10,
+        alignItems:"center",
+        justifyContent:"center",
+        borderRadius:10,
+        marginLeft:10,
+    }
 })
 
 const nav = StyleSheet.create({
@@ -283,13 +322,9 @@ const nav = StyleSheet.create({
     options:{
         width: deviceWidth,
         backgroundColor: colors.primary,
-        // height:120,
-        // marginTop: 125,
         marginRight:-20, 
-        
         justifyContent:"space-around",  
-        flexDirection:"row"
-
+        flexDirection:"row" 
     },
     option:{
         paddingVertical:5,
@@ -344,5 +379,20 @@ const tabbar = StyleSheet.create({
         color:colors.primary,
     }
 })
+const admin = StyleSheet.create({
+    container:{
+        padding:10,
+        alignItems:"center"
+    },
+    addButton:{
+        width:"100%",
+        height: 50,
+        backgroundColor: colors.primary,
+        margin:10,
+        borderRadius:10,
+        alignItems:"center",
+        justifyContent:"center",
+    }
+})
 
-export { colors, theme, text, nav , tabbar}
+export { colors, theme, text, nav , tabbar, admin}

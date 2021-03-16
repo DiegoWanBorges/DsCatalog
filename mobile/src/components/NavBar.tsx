@@ -4,6 +4,7 @@ import { nav, text } from '../styles'
 import { useNavigation, useRoute } from '@react-navigation/core';
 import menu from '../assets/images/menu.png'
 import { doLogout, isAuthenticated } from '../services/auth';
+import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 const NavBar: React.FC = () => {
     const [show, setShow] = useState(false);
@@ -37,7 +38,7 @@ const NavBar: React.FC = () => {
         <>
             {
                 authenticated ? (
-                    <TouchableOpacity style={nav.logoutBtn} onPress={() =>logout()}>
+                    <TouchableOpacity style={nav.logoutBtn} onPress={() => logout()}>
                         <Text style={text.logoutText}>Sair</Text>
                     </TouchableOpacity>
                 ) : (
@@ -86,7 +87,8 @@ const NavBar: React.FC = () => {
                                     Adm
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity
+                            
+                            { <TouchableOpacity
                                 onPress={() => setShow(false)}
                                 style={nav.option}
                             >
@@ -95,7 +97,8 @@ const NavBar: React.FC = () => {
                                 >
                                     Cancel
                                 </Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> }
+
                         </View>
                         ):<></>
                     }

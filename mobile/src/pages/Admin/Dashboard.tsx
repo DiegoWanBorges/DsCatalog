@@ -6,9 +6,10 @@ import { theme, text } from '../../styles'
 
 import { useNavigation } from '@react-navigation/core';
 import { TabBar } from '../../components';
-import Products from './Products';
+import Products from './Products/ListProducts';
 import Categories from './Categories';
 import Users from './Users';
+import FormProducts from './Products/FormProduct';
 const Dashboard: React.FC = () => {
     const [screen,setScreen]=useState('products');
     const navigation = useNavigation();
@@ -18,7 +19,8 @@ const Dashboard: React.FC = () => {
                 screen={screen}
                 setScreen={setScreen}
             />
-            {screen==="products" && <Products/>}
+            {screen==="products" && <Products setScreen={setScreen}/>}
+            {screen==="newProduct" && <FormProducts setScreen={setScreen}/>}
             {screen==="categories" && <Categories/>}
             {screen==="users" && <Users/>}
 
