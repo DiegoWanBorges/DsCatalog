@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { View, Text, ScrollView, ActivityIndicator } from 'react-native'
 import { ProductCard, SearchInput } from '../components'
-import { theme } from '../styles'
+import { colors, theme } from '../styles'
 import { makeRequest } from '../services'
 import { Product } from '../utils/types'
 
@@ -39,7 +39,7 @@ const Catalog: React.FC = () => {
             />
             {
                 loading ? (
-                    <ActivityIndicator size="large" />
+                    <ActivityIndicator size="large" color={colors.primary} />
                 ) :
                     (data.map((product) => (
 

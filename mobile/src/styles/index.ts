@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
+import { round } from 'react-native-reanimated';
 
 
 const deviceWidth = Dimensions.get('window').width;
@@ -35,7 +36,6 @@ const text = StyleSheet.create({
         fontWeight:"bold",
         color:colors.white,
         marginLeft:20,
-
     },
     productName:{
         fontSize:16,
@@ -68,8 +68,17 @@ const text = StyleSheet.create({
         fontSize:16,
         fontWeight:"400",
         color:colors.mediumGray,
+    },
+    loginTitle:{
+        fontSize:30,
+        fontWeight:"400",
+        color:colors.darkGray,
+        textTransform:"uppercase",
+        marginBottom:50,
+    },
+    logoutText:{
+        color:colors.white,
     }
-
 })
 
 const theme = StyleSheet.create({
@@ -223,6 +232,43 @@ const theme = StyleSheet.create({
         borderRadius:10,
         borderColor: colors.darkGray,
     },
+    loginCard:{
+        width: '100%',
+        height: '100%',
+        backgroundColor: colors.white,
+        borderRadius:20,
+        shadowColor:colors.black,
+        shadowOffset:{
+            width:0,
+            height:2
+        },
+        shadowOpacity:0.25,
+        shadowRadius:3.84,
+        alignItems:'center',
+        justifyContent: "center"
+    },
+    form:{
+        marginVertical:10,
+
+    },
+    textInput:{
+        width:290,
+        height:50,
+        borderWidth:1,
+        borderColor:colors.mediumGray,
+        borderRadius:10,
+        padding:10
+    },
+    passwordGroup:{
+        flexDirection:"row",
+        alignItems:"center",
+        marginVertical:25
+    },
+    toggle:{
+        marginLeft:-40
+    },
+    
+
 })
 
 const nav = StyleSheet.create({
@@ -237,22 +283,40 @@ const nav = StyleSheet.create({
     options:{
         width: deviceWidth,
         backgroundColor: colors.primary,
-        height:120,
-        marginTop: 125,
-        marginRight:-20,
-        padding:20,
-        justifyContent:"space-between",  
+        // height:120,
+        // marginTop: 125,
+        marginRight:-20, 
+        
+        justifyContent:"space-around",  
+        flexDirection:"row"
+
     },
     option:{
         paddingVertical:5,
+        width:80,
+        height:30,
+        borderWidth:1,
+        alignItems:"center",
+        borderColor: colors.white,
+        borderRadius:10,
     },
     textOption:{
         color:colors.white,
         textTransform:"uppercase",
     },
     textActive:{
-        fontWeight:"bold"
+        fontWeight:"bold" 
     },
+    logoutBtn:{
+        width:60,
+        height:30,
+        borderWidth:1,
+        borderColor: colors.white,
+        borderRadius:10,
+        alignItems:"center",
+        justifyContent:"center",
+        marginRight:20,
+    }
 })
 
 export { colors, theme, text, nav }

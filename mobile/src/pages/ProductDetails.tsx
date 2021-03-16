@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
-import { theme, text } from '../styles'
+import { theme, text, colors } from '../styles'
 import { useNavigation } from '@react-navigation/core';
 
 import { makeRequest } from '../services';
@@ -24,7 +24,7 @@ const ProductDetails = ({ route: { params: { id } } }) => {
     return (
             <View style={theme.detailContainer}> 
                 {
-                    loading ? (<ActivityIndicator size="large"/>) :
+                    loading ? (<ActivityIndicator size="large" color={colors.primary}/>) :
                     (
                         <View style={theme.detailCard}> 
                             <TouchableOpacity style={theme.goBackContainer} onPress={() =>navigation.goBack()}>

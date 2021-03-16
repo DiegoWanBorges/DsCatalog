@@ -1,5 +1,5 @@
 import React from 'react'
-import { Home, Catalog, ProductDetails } from '../pages'
+import { Home, Catalog, ProductDetails, Login, Dashboard } from '../pages'
 import { createStackNavigator } from '@react-navigation/stack'
 import { colors, nav } from '../styles';
 import { Text } from 'react-native';
@@ -15,7 +15,8 @@ const Routes: React.FC = () =>{
                 headerTitle:"",
                 headerStyle:{
                     backgroundColor: colors.primary,
-                },
+                    height:80,                    
+                  },
                 headerLeft: () => <HeaderText/>,
                 headerRight: () => <NavBar/>,
             }}
@@ -23,6 +24,8 @@ const Routes: React.FC = () =>{
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Catalog" component={Catalog} />
             <Stack.Screen name="ProductDetails" component={ProductDetails} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Dashboard" component={Dashboard} />
         </Stack.Navigator>
     )
 }
