@@ -1,8 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native'
-import { round } from 'react-native-reanimated';
-
 
 const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
 
 const colors ={
     white: "#FFF",
@@ -307,6 +306,76 @@ const theme = StyleSheet.create({
         justifyContent:"center",
         borderRadius:10,
         marginLeft:10,
+    },
+    formContainer:{
+        width:deviceWidth,
+        padding:20,  
+    },
+    formCard:{
+        width:"100%",
+        height:"90%",
+        backgroundColor:colors.white,
+        borderRadius:20,
+        padding:20,
+        shadowColor:colors.black,
+        shadowOffset:{
+            width:0,
+            height:0,
+        },
+        shadowOpacity:0.25,
+        shadowRadius:3.84,
+        alignItems:"center",
+        justifyContent:"space-around",
+    },
+    modalContainer:{
+        width:deviceWidth,
+        height:deviceHeight,
+        backgroundColor:"#00000033",
+        alignItems:"center",
+        justifyContent:"center",
+    },
+    modalContent:{
+        width:300,
+        justifyContent:"center",
+        alignContent:"center",
+        marginTop:"50%",
+        backgroundColor:colors.white,
+        borderRadius:20,
+        padding:20,
+        shadowColor:colors.black,
+        shadowOffset:{
+            width:0,
+            height:2,
+        },
+        shadowOpacity:0.25,
+        shadowRadius:3.84,
+        elevation:5,
+
+    },
+    modalItem:{
+        width:"100%",
+        backgroundColor:colors.lightGray,
+        padding:10,
+        marginVertical:5,
+        borderRadius:5
+    },
+    formInput:{
+        width:"90%",
+        height:50,
+        borderWidth:1,
+        borderColor:colors.mediumGray,
+        borderRadius:10,
+        padding:10,
+        marginVertical:15,
+    },
+    textArea:{
+        width:"90%",
+        height:200,
+        borderWidth:1,
+        borderColor:colors.mediumGray,
+        borderRadius:10,
+        padding:10,
+        marginVertical:15,
     }
 })
 
