@@ -92,6 +92,26 @@ const text = StyleSheet.create({
         textTransform:"uppercase",
         fontWeight:"bold",
         color:colors.mediumGray,
+    },
+    inputBoxText:{
+        color:"#cecece"
+    },
+    uploadText:{
+        color:colors.white,
+        textTransform:"uppercase",
+        fontWeight:"bold",
+    },
+    fileSize:{
+        color:colors.primary,
+        fontSize:10,
+        fontWeight:"300",
+        marginVertical:5,
+        padding:2
+    },
+    saveText:{
+        textTransform:"uppercase",
+        fontWeight:"bold",
+        color:colors.white,
     }
 })
 
@@ -309,7 +329,7 @@ const theme = StyleSheet.create({
     },
     formContainer:{
         width:deviceWidth,
-        padding:20,  
+        
     },
     formCard:{
         width:"100%",
@@ -320,7 +340,7 @@ const theme = StyleSheet.create({
         shadowColor:colors.black,
         shadowOffset:{
             width:0,
-            height:0,
+            height:2,
         },
         shadowOpacity:0.25,
         shadowRadius:3.84,
@@ -337,7 +357,7 @@ const theme = StyleSheet.create({
     modalContent:{
         width:300,
         justifyContent:"center",
-        alignContent:"center",
+        alignItems:"center",
         marginTop:"50%",
         backgroundColor:colors.white,
         borderRadius:20,
@@ -360,7 +380,7 @@ const theme = StyleSheet.create({
         borderRadius:5
     },
     formInput:{
-        width:"90%",
+        width:"100%",
         height:50,
         borderWidth:1,
         borderColor:colors.mediumGray,
@@ -369,13 +389,40 @@ const theme = StyleSheet.create({
         marginVertical:15,
     },
     textArea:{
-        width:"90%",
-        height:200,
+        width:"100%",
+        height:150,
         borderWidth:1,
         borderColor:colors.mediumGray,
         borderRadius:10,
         padding:10,
         marginVertical:15,
+        textAlignVertical:"top"
+    },
+    selectInput:{
+        width:"100%",
+        height:50,
+        borderWidth:1,
+        borderColor:colors.mediumGray,
+        borderRadius:10,
+        padding:10,
+        justifyContent:"center"
+    },
+    uploadBtn:{
+        width:"100%",
+        height:40,
+        backgroundColor:colors.mediumGray,
+        borderRadius:5,
+        alignItems:"center",
+        justifyContent:"center",
+    },
+    saveBtn:{
+        width:"40%",
+        height:40,
+        backgroundColor: colors.primary,
+        marginVertical:10,
+        alignItems:"center",
+        justifyContent:"center",
+        borderRadius:10
     }
 })
 

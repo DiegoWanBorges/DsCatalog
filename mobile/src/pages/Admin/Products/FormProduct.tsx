@@ -76,10 +76,12 @@ const FormProducts: React.FC<Props> = ({ setScreen }: Props) => {
                             placeholder="Nome do produto"
                             style={theme.formInput}
                         />
-                        <TouchableOpacity onPress={() => setShowCategories(!showCategories)}>
+                        <TouchableOpacity 
+                            onPress={() => setShowCategories(!showCategories)}
+                            style={theme.selectInput}
+                        >
                             <Text >
-                                {
-                                    product?.categories === undefined 
+                                {product?.categories === undefined 
                                         ? ("Escolha uma categoria")
                                         : (product?.categories)
                                 }
@@ -89,26 +91,44 @@ const FormProducts: React.FC<Props> = ({ setScreen }: Props) => {
                             placeholder="Preço"
                             style={theme.formInput}
                         />
-                        <TouchableOpacity>
-                            <Text>
+                        <TouchableOpacity
+                            activeOpacity={0.8}
+                            style={theme.uploadBtn}
+                        >
+                            <Text
+                                style={text.uploadText}
+                            >
                                 Carregar Imagem
                         </Text>
                         </TouchableOpacity>
-                        <Text>
+                        <Text
+                            style={text.fileSize}
+                        >
                             As imagens devem ser  JPG ou PNG e não devem ultrapassar 5 mb.
                     </Text>
                         <TextInput 
                             multiline placeholder="Descrição" 
                             style={theme.textArea}
                         />
-                        <View>
-                            <TouchableOpacity>
-                                <Text>
+                        <View
+                            style={theme.buttonContainer}
+                        >
+                            <TouchableOpacity 
+                                style={theme.deleteBtn}
+                            >
+                            <Text
+                                style={text.deleteTxt}
+                            >
                                     Cancelar
                             </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
-                                <Text>
+                           
+                            <TouchableOpacity
+                                style={theme.saveBtn}
+                            >
+                                <Text
+                                    style={text.saveText}
+                                >
                                     Salvar
                             </Text>
                             </TouchableOpacity>
