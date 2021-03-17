@@ -15,14 +15,20 @@ type AccessToken = {
    authorities: Role[];
 }
 
-export const saveSessionData = (token: string) => {
-   AsyncStorage.setItem('@token', JSON.stringify(token));
+export async function saveSessionData (token: string){
+   await AsyncStorage.setItem('token', token);
+   
 
 }
+export async function userToken() {
+     const token = await AsyncStorage.getItem('token')
+     return token
+}
+
 
 export async function isAuthenticated() {
    try {
-      const token = await AsyncStorage.getItem('@token');
+      const token = await AsyncStorage.getItem('token');
       return token ? true : false;
    } catch (error) {
       console.log(error)
@@ -30,7 +36,7 @@ export async function isAuthenticated() {
 }
 export async function doLogout() {
    try {
-      await AsyncStorage.removeItem("@token")
+      await AsyncStorage.removeItem("token")
    } catch (error) {
       console.log(error)
    }

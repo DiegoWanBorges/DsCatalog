@@ -21,7 +21,7 @@ const Login: React.FC = () => {
     )
 
     async function handleLogin() {
-        makeLogin(userInfo)
+       await makeLogin(userInfo)
             .then(response => {
                 setLoggingIn(true)
                 saveSessionData(response.data.access_token);

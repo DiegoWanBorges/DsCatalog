@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { useNavigation } from '@react-navigation/core';
 import { ProductCard, SearchInput } from '../../../components';
-import { makeRequest } from '../../../services';
+import { makePrivateRequest, makeRequest } from '../../../services';
 import { Product } from '../../../utils/types';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors, theme, admin, text } from '../../../styles';
+import Toast from 'react-native-tiny-toast';
 const params = {
     linesPerPage: 1000,
 }
@@ -22,14 +23,38 @@ const Products: React.FC<Props> = ({ setScreen }:Props) => {
             product.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
         : products;
-    useEffect(() => {
+    async function fillProducts() {
         setLoading(true)
-        makeRequest({ url: '/products', params })
+        await makeRequest({ url: '/products', params })
             .then(response => setProducts(response.data.content))
             .finally(() => {
                 setLoading(false)
             })
+    }
+    useEffect(() => {
+        fillProducts()
     }, []);
+
+    async function handleDelete(id:number) {
+        setLoading(true)
+        await  makePrivateRequest({
+            url: `/products/${id}`,
+            method: 'DELETE',
+            data: data
+        })
+            .then((response) => {
+                Toast.showSuccess("Produto excluido com sucesso")
+                setLoading(false);
+                fillProducts()
+            })
+            .catch((erro) => {
+                Toast.show("Erro ao excluir produto")
+                console.log(erro)
+                setLoading(false);
+            })
+        
+    }
+
     return (
         <ScrollView contentContainerStyle={admin.container}>
             <TouchableOpacity 
@@ -50,7 +75,12 @@ const Products: React.FC<Props> = ({ setScreen }:Props) => {
                     <ActivityIndicator size="large" color={colors.primary} />
                 ) :
                     (data.map((product) => (
-                    <ProductCard key={product.id} product={product} role="admin" />
+                    <ProductCard 
+                        {...product}
+                        key={product.id} 
+                        role="admin" 
+                        handleDelete={handleDelete}
+                    />
             )))}
         </ScrollView>
     )
