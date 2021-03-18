@@ -23,7 +23,6 @@ export async function makeRequest (params: AxiosRequestConfig)  {
 
 export async function makePrivateRequest (params: AxiosRequestConfig) {
     const token = await userToken();
-    console.log("User token: " + token)
     const headers ={
         Authorization: `Bearer ${token}`
     }

@@ -6,6 +6,8 @@ import { makePrivateRequest, makeRequest } from '../../../services';
 import arrow from '../../../assets/images/leftArrow.png'
 import Toast from 'react-native-tiny-toast';
 import { TextInputMask } from 'react-native-masked-text';
+import * as ImagePicker from 'expo-image-picker'
+import mime from 'mime'
 type Props = {
     setScreen: Function;
 }
@@ -16,19 +18,79 @@ const params = {
 }
 
 const FormProducts: React.FC<Props> = ({ setScreen }: Props) => {
+    const [image, setImage] = useState("");
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     const [edit, setEdit] = useState(false);
-    const productId =0;
-    const [product, setProduct] = useState({
-            name: "",
-            description: "",
-            imgUrl: "",
-            price: "",
-            categories: [],
-        });
+    const productId = 0;
     const [categories, setCategories] = useState([]);
     const [showCategories, setShowCategories] = useState(false);
+    const [product, setProduct] = useState({
+        name: "",
+        description: "",
+        imgUrl: "",
+        price: "",
+        categories: [],
+    });
+    useEffect(() => {
+        async () => {
+            const { status } = await ImagePicker.requestCameraPermissionsAsync();
+            if (status != "granted") {
+                Alert.alert("Sem acesso a biblioteca de imagem");
+            }
+        }
+    }, []);
+
+
+
+    async function selectImage() {
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1
+        });
+        setImage(result.uri);
+    }
+
+    const handlerUpload = () => {
+
+        const newImageUri = "file:///" + image.split("file:/").join("");
+
+        const data = new FormData();
+        data.append('file', {
+            uri: newImageUri,
+            type: mime.getType(newImageUri),
+            name: newImageUri.split("/").pop()
+        });
+
+
+
+        // const data = new FormData();
+        // data.append('file', {
+        //     uri:image,
+        //     name:image,
+        // });
+        makePrivateRequest({
+            url: '/products/image/',
+            method: 'POST',
+            data: data,
+        })
+            .then(response => {
+                setProduct({ ...product, imgUrl: response.data.uri })
+                console.log(response)
+            })
+            .catch((erro) => {
+                console.log(erro)
+            })
+            .finally(() => {
+
+            })
+    }
+
+    useEffect(() => {
+        image ? handlerUpload() : null
+    }, [image])
 
     async function listCategopries() {
         setLoading(true)
@@ -42,20 +104,21 @@ const FormProducts: React.FC<Props> = ({ setScreen }: Props) => {
         listCategopries()
     }, []);
 
-   async function handleSave() {
+    async function handleSave() {
         setLoading(true)
-        const data ={
+        const data = {
             ...product,
             price: getRaw(),
-            categories:[
+            categories: [
                 {
-                    id:replaceCategory()
+                    id: replaceCategory()
                 }
             ]
         };
-        await  makePrivateRequest({
-            url: edit ? `/products/${productId}`: '/products/',
-            method: edit ? 'PUT': 'POST',
+        console.log(data);
+        await makePrivateRequest({
+            url: edit ? `/products/${productId}` : '/products/',
+            method: edit ? 'PUT' : 'POST',
             data: data
         })
             .then((response) => {
@@ -69,13 +132,13 @@ const FormProducts: React.FC<Props> = ({ setScreen }: Props) => {
             })
 
     }
-    function replaceCategory(){
-        const cat =categories.find(category => category.name === product.categories);
+    function replaceCategory() {
+        const cat = categories.find(category => category.name === product.categories);
         return cat.id;
     }
     function getRaw() {
         const str = product.price
-        const res = str.slice(2).replace(/\./g, "").replace(/./g,".");    
+        const res = str.slice(2).replace(/\./g, "").replace(/,/g, ".");
         return res;
     }
     return (
@@ -136,8 +199,8 @@ const FormProducts: React.FC<Props> = ({ setScreen }: Props) => {
                                 }
                             </Text>
                         </TouchableOpacity>
-                       
-                        
+
+
                         <TextInputMask
                             type="money"
                             placeholder="Preço"
@@ -145,10 +208,11 @@ const FormProducts: React.FC<Props> = ({ setScreen }: Props) => {
                             value={product.price}
                             onChangeText={(e) => setProduct({ ...product, price: e })}
                         />
-                     
+
                         <TouchableOpacity
                             activeOpacity={0.8}
                             style={theme.uploadBtn}
+                            onPress={selectImage}
                         >
                             <Text
                                 style={text.uploadText}
@@ -160,7 +224,23 @@ const FormProducts: React.FC<Props> = ({ setScreen }: Props) => {
                             style={text.fileSize}
                         >
                             As imagens devem ser  JPG ou PNG e não devem ultrapassar 5 mb.
-                    </Text>
+                        </Text>
+                        {
+                            image != "" && (
+                                <TouchableOpacity
+                                    onPress={selectImage}
+                                    activeOpacity={0.9}
+                                    style={{
+                                        width: "100%",
+                                        height: 150,
+                                        borderRadius: 10,
+                                        marginVertical: 10,
+                                    }}
+                                >
+                                    <Image source={{ uri: image }} style={{ width: "100%", height: "100%", borderRadius: 10 }} />
+                                </TouchableOpacity>
+                            )
+                        }
                         <TextInput
                             multiline
                             placeholder="Descrição"

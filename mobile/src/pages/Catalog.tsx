@@ -20,7 +20,7 @@ const Catalog: React.FC = () => {
             product.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
         : products;
- 
+
     useEffect(() => {
         setLoading(true)
         makeRequest({ url: '/products', params })
@@ -43,7 +43,11 @@ const Catalog: React.FC = () => {
                 ) :
                     (data.map((product) => (
 
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCard
+                            {...product}
+                            key={product.id}
+
+                        />
                     )))}
         </ScrollView>
 
