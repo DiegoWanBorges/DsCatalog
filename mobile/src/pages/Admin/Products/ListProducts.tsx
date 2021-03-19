@@ -12,8 +12,9 @@ const params = {
 }
 type Props={
     setScreen:Function;
+    setProductId: Function;
 }
-const Products: React.FC<Props> = ({ setScreen }:Props) => {
+const Products: React.FC<Props> = ({ setScreen,setProductId }:Props) => {
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     const [products, setProducts] = useState<Product[]>([]);
@@ -54,6 +55,11 @@ const Products: React.FC<Props> = ({ setScreen }:Props) => {
             })
         
     }
+    function handleEdit(id:number){
+        setProductId(id);
+        setScreen("editProduct")
+    }
+
 
     return (
         <ScrollView contentContainerStyle={admin.container}>
@@ -80,6 +86,7 @@ const Products: React.FC<Props> = ({ setScreen }:Props) => {
                         key={product.id} 
                         role="admin" 
                         handleDelete={handleDelete}
+                        handleEdit={handleEdit}
                     />
             )))}
         </ScrollView>

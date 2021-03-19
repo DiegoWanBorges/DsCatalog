@@ -13,9 +13,10 @@ type Props = {
     price:string;
     role?: string;
     handleDelete: Function;
+    handleEdit: Function;
 }
 
-const ProductCard: React.FC<Props> = ({ id,name,imgUrl,price, role, handleDelete }: Props) => {
+const ProductCard: React.FC<Props> = ({ id,name,imgUrl,price, role, handleDelete,handleEdit }: Props) => {
     const navigation = useNavigation();
     return (
         <TouchableOpacity
@@ -57,7 +58,10 @@ const ProductCard: React.FC<Props> = ({ id,name,imgUrl,price, role, handleDelete
                         >
                             <Text style={text.deleteTxt}>Excluir</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={theme.editBtn}>
+                        <TouchableOpacity 
+                            style={theme.editBtn}
+                            onPress={() =>handleEdit(id)}
+                        >
                             <Text style={text.editTxt}>Editar</Text>
                         </TouchableOpacity>
 
