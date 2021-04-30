@@ -68,7 +68,7 @@ const Catalog = () => {
                 {isLoading ? <ProductCardLoader /> : (
                     productsResponse?.content.map(product => (
                         <Link to={`/products/${product.id}`} key={product.id}  >
-                            <ProductCard product={product} />
+                            <ProductCard  product={product} />
                         </Link>
                     ))
                 )}

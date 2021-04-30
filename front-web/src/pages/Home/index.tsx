@@ -17,8 +17,6 @@ const Home = () => (
                 <Link to="/products" className="start-search-btn"> 
                     <ButtonIcon text="INICIE AGORA SUA BUSCA" />
                 </Link>
-                
-                
                 </div>
                 <div className="col-6">
                     <MainImage className="main-image" />

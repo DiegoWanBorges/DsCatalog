@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { tabbar } from '../styles'
-import { useNavigation } from '@react-navigation/core';
+
 
 type Props={
     screen?:string;
@@ -9,7 +9,7 @@ type Props={
 }
 
 const TabBar: React.FC<Props> = ({ screen,setScreen }:Props) => {
-    const navigation = useNavigation();
+    
 
 
     function changeScreen(page:string){

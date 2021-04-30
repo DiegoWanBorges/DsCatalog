@@ -30,6 +30,7 @@ const ProductFilter = ({ name,category,handleChangeName,handleChangeCategory,cle
 
     return (
         <div className="card-base product-filters-container">
+            
             <div className="input-search">
                 <input
                     type="text"
@@ -40,6 +41,7 @@ const ProductFilter = ({ name,category,handleChangeName,handleChangeCategory,cle
                 />
                 <SearchIcon />
             </div>
+
             <Select
                 name="categories"
                 value={category}
@@ -54,6 +56,7 @@ const ProductFilter = ({ name,category,handleChangeName,handleChangeCategory,cle
                 onChange={value => handleChangeCategory(value as Category)}
                 isClearable
             />
+            
             <button 
                     className="btn btn-outline-secondary"
                     onClick={clearFilters}

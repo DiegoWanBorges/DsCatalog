@@ -4,7 +4,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { TextInputMask } from 'react-native-masked-text';
 import { text, theme } from '../styles';
-import { Product } from '../utils/types';
+
 
 type Props = {
     id:number;
@@ -46,7 +46,7 @@ const ProductCard: React.FC<Props> = ({ id,name,imgUrl,price, role, handleDelete
                         value={ price }
                         style={text.producPrice}
                     />
-                    {/* <Text style={text.producPrice}>{product.price}</Text> */}
+                    
                 </View>
             </View>
             {
